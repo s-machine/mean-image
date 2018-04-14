@@ -1,8 +1,10 @@
 html{
+  font-family: sans-serif;
   background-color: #111;
 }
 
 h1{
+  font-size: 2em;
   margin: auto;
   margin-top: 5%;
   width: 50%;
