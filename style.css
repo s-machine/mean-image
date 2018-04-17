@@ -13,8 +13,10 @@ h1{
   text-align: center;
 }
 
-.gallery{
-  margin: 5% 5%;
+.page{
+  height: 100%;
+  width: 90%;
+  margin: 0 auto;
 }
 
 h2{
