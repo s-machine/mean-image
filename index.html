@@ -1,0 +1,158 @@
+
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <title>Mean Images</title>
+        <link rel="stylesheet" href="style.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway:400,900">
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <script src="js/jquery.mousewheel.min.js"></script>
+        <script src="js/jquery.easing.js"></script>
+        <script src="js/jquery.singular.js"></script>
+        <script>
+            $(function() {
+                $('.js-singular').singular({
+                    section: '.mod-singular-section',
+                    nav: '.js-singular-nav',
+                    prev: '.js-singular-prev',
+                    next: '.js-singular-next',
+                    navActiveClass: 'js-singular-active',
+                    scrollSpeed: 1000,
+                    mousewheel: true,
+                    easing: 'easeInOutQuart',
+                    scrollEnd: function(elem) {
+                        console.log('scrollEnd');
+                    }
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <div class="mod-page">
+
+            <div class="mod-singular js-singular">
+
+                <div id="sec01" class="mod-singular-section"><div class="mod-singular-section-in">
+                    <div class="transbox">
+                    <h1 class="mod-singular-ttl">Mean Images</h1>
+                    <h2 class="mod-singular-subttl">an exploration of culture through pixels</h2>
+                    <p id="authors" class="mod-singular-txt"><a href="/">Xingxin Chen</a>, <a href="https://sienaduplan.com">Siena Duplan</a>, <a href="/">Samson Liu</a></p>
+                    </div>
+                    <p class="mod-singular-pager"><a href="" class="mod-singular-next js-singular-next"></a></p>
+                    <div id="salavon">
+                        <p><a href="http://salavon.com/work/EveryPlayboyCenterfoldDecades/" target="_blank">?</a></p>
+                    </div>
+                    <!-- /mod-singular-section --></div></div>
+
+                <section id="sec02" class="mod-singular-section"><div class="mod-singular-section-in">
+                    <h2 class="mod-singular-hdng">What is a "mean" image?</h2>
+                    <p class="mod-singular-txt-2">Images like the ones below are the result of mathematically averaging several photographs. Digital averaging of pixels is a simple process where each pixel is treated as a numeric point with a unique RGB value. </p>
+                    <p class="mod-singular-txt-2">This project is inspired by the artwork of contemporary artist <a href="http://www.salavon.com" target="_blank">Jason Salavon</a> whose series <a href="http://salavon.com/work/SpecialMoments/" target ="_blank">"100 Special Moments”</a> is shown below. Salavon is known for using computer software to reconfigure existing media into fine art. His series on averaged images straddles the boundary between art and data visualization, often revealing never-before-seen patterns in the pixels captured in photographs.
+                    </p>
+                    <a href="http://salavon.com/work/SpecialMoments/" target="_blank"><img src="images/100moments.png" width="700"></a>
+                    <p class="mod-singular-pager"><a href="" class="mod-singular-prev js-singular-prev"></a><a href="" class="mod-singular-next js-singular-next"></a></p>
+                    <!-- /mod-singular-section --></div></section>
+
+                <section id="sec03" class="mod-singular-section"><div class="mod-singular-section-in">
+                    <h2 class="mod-singular-hdng">An "average" face?</h2>
+                    <div class="container">
+                    <img src="/images/cropped_yale.gif" width="700">
+                    <p class="mod-singular-txt-3 bottom-right">The <a href="http://academictorrents.com/details/aad8bf8e6ee5d8a3bf46c7ab5adfacdd8ad36247" target="_blank">Cropped Yale Dataset</a> is a widely-used dataset for machine learning and image processing research. The dataset contains 16128 images of 28 human subjects in 9 poses and 64 illumination conditions. It’s popularity is due in part to its high-quality alignment of facial features which allows the "mean" image of thousands of images to resemble a single face. <br><br> Interestingly, the more images that are used to compute the average face, the slower the rate of change in the mean image. That is, the average image tends to converge fairly quickly (between 20 and 50 images). See for yourself below! 
+                    </p>
+                    </div>
+                    <p class="mod-singular-pager"><a href="" class="mod-singular-prev js-singular-prev"></a><a href="" class="mod-singular-next js-singular-next"></a></p>
+                    <!-- /mod-singular-section --></div></section>
+
+                <section id="sec04" class="mod-singular-section"><div class="mod-singular-section-in">
+                    <h2 class="mod-singular-hdng">Can you find the point of convergence?</h2>
+                    <div class="grid-container">
+                      <div class="grid-item"><img id="img" width="300"></div>
+                      <div class="grid-item"><img src="images/mean_faces_2414.png" width="300"></div>
+                      <div class="grid-item">
+                            <input class="slider-width" id="valR" type="range" min="0" max="5" value="0" step="1" oninput="showVal(this.value)" onchange="showVal(this.value)" />
+                            <span id="range">0</span>
+                            <span id="realval">10</span>
+                            <span id="">faces</span>
+                        </div>  
+                      <div class="grid-item">2414 faces</div> 
+                    </div>
+                                            
+                        
+                    <script>
+                    var val = document.getElementById("valR").value;
+                    document.getElementById("range").innerHTML=val;
+                    var numImages = 10;
+                    document.getElementById("img").src = "images/mean_faces_" + numImages + ".png";
+                    function showVal(newVal){
+                        if(newVal==0){
+                            numImages = 10;
+                        }
+                        else if(newVal==1) {
+                            numImages = 50;
+                        }
+                        else if(newVal==2) {
+                            numImages = 100;
+                        }
+                        else if(newVal==3) {
+                            numImages = 500;
+                        }
+                        else if(newVal==4) {
+                            numImages = 1000;
+                        }
+                        else {
+                            numImages = 2414;
+                        }
+                        document.getElementById("range").innerHTML=newVal;
+                        document.getElementById("realval").innerHTML=numImages;
+                        document.getElementById("img").src = "images/mean_faces_" + numImages + ".png";
+                    }
+                    </script>
+                         
+                    <p class="mod-singular-pager"><a href="" class="mod-singular-prev js-singular-prev"></a><a href="" class="mod-singular-next js-singular-next"></a></p>
+                    <!-- /mod-singular-section --></div></section>
+                
+                
+                
+                
+                
+                
+                
+                           
+                
+                
+                <section id="sec05" class="mod-singular-section"><div class="mod-singular-section-in">
+                    <h2 class="mod-singular-hdng">Section 5</h2>
+  
+                    <p class="mod-singular-pager"><a href="" class="mod-singular-prev js-singular-prev"></a><a href="" class="mod-singular-next js-singular-next"></a></p>
+                    <!-- /mod-singular-section --></div></section>
+                
+                <section id="sec06" class="mod-singular-section"><div class="mod-singular-section-in">
+                    <h2 class="mod-singular-hdng">Section 6</h2>
+
+                    <p class="mod-singular-pager"><a href="" class="mod-singular-prev js-singular-prev"></a><a href="" class="mod-singular-next js-singular-next"></a></p>
+                    <!-- /mod-singular-section --></div></section>
+
+                <section id="sec07" class="mod-singular-section"><div class="mod-singular-section-in">
+                    <h2 class="mod-singular-hdng">Section 7</h2>
+
+                    <p class="mod-singular-pager"><a href="" class="mod-singular-prev js-singular-prev"></a></p>
+                    <!-- /mod-singular-section --></div></section>
+
+                <!-- /mod-singular --></div>
+
+            <div class="mod-nav">
+                <ul class="mod-nav-list js-singular-nav">
+                    <li class="mod-nav-item"><a href="#sec01">1</a></li>
+                    <li class="mod-nav-item"><a href="#sec02">2</a></li>
+                    <li class="mod-nav-item"><a href="#sec03">3</a></li>
+                    <li class="mod-nav-item"><a href="#sec04">4</a></li>
+                    <li class="mod-nav-item"><a href="#sec05">5</a></li>
+                    <li class="mod-nav-item"><a href="#sec06">6</a></li>
+                    <li class="mod-nav-item"><a href="#sec07">7</a></li>
+                </ul>
+                <!-- /mod-nav --></div>
+
+            <!-- /mod-page --></div>
+    </body>
+</html>
