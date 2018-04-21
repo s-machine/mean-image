@@ -83,7 +83,7 @@ a {
     box-sizing: border-box;
 }
 .mod-singular-section:first-child {
-    background-image: url("/images/playboy_cover.jpg");
+    background-image: url("images/playboy_cover.jpg");
     background-repeat: no-repeat;
     background-size:cover;
 }
