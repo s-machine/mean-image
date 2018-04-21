@@ -1,0 +1,298 @@
+@font-face {
+    font-family: "hn_thin";
+    src: url("../fonts/hn_thin.otf");
+}
+/* http://meyerweb.com/eric/tools/css/reset/ 
+v2.0 | 20110126
+License: none (public domain)
+*/
+html, body, div, span, applet, object, iframe,
+h1, h2, h3, h4, h5, h6, p, blockquote, pre,
+a, abbr, acronym, address, big, cite, code,
+del, dfn, em, img, ins, kbd, q, s, samp,
+small, strike, strong, sub, sup, tt, var,
+b, u, i, center,
+dl, dt, dd, ol, ul, li,
+fieldset, form, label, legend,
+table, caption, tbody, tfoot, thead, tr, th, td,
+article, aside, canvas, details, embed, 
+figure, figcaption, footer, header, hgroup, 
+menu, nav, output, ruby, section, summary,
+time, mark, audio, video {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-size: 100%;
+    font: inherit;
+    vertical-align: baseline;
+}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure, 
+footer, header, hgroup, menu, nav, section {
+    display: block;
+}
+body {
+    line-height: 1;
+}
+p {
+    font-size: 18px;
+}
+ol, ul {
+    list-style: none;
+}
+blockquote, q {
+    quotes: none;
+}
+blockquote:before, blockquote:after,
+q:before, q:after {
+    content: '';
+    content: none;
+}
+table {
+    border-collapse: collapse;
+    border-spacing: 0;
+}
+
+/**
+* Base
+*/
+html, body {
+    height: 100%;
+}
+body {
+    color: #fff;
+}
+a {
+    color: #ed0b48;
+}
+
+/**
+*  mod-singular
+*/
+.mod-singular {
+    font-family: 'hn_thin';
+    height: 100%;
+    left: 0;
+    position: fixed;
+    top: 0;
+    width: 100%;
+}
+.mod-singular-section {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+.mod-singular-section:first-child {
+    background-image: url("/images/playboy_cover.jpg");
+    background-repeat: no-repeat;
+    background-size:cover;
+}
+.mod-singular-section:nth-child(2) {
+    background: #fff;
+}
+.mod-singular-section:nth-child(3) {
+    background: #FCFCFF;
+}
+.mod-singular-section:nth-child(4) {
+    background: #fff;
+}
+.mod-singular-section:nth-child(5) {
+    background: #fff;
+}
+.mod-singular-section:nth-child(6) {
+    background: #fff;
+}
+.mod-singular-section:last-child {
+    background: #fff;
+}
+.mod-singular-section-in {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    height: 100%;
+    padding: 14% 0%;
+    text-align: center;
+}
+.mod-singular-ttl {
+    font-size: 500%;
+    margin-bottom: 10px;
+}
+.mod-singular-txt {
+    line-height: 1.2;
+    margin: 1.5em 0;
+}
+.mod-singular-pre {
+    background: rgba(0, 0, 0, 0.2);
+    line-height: 1.2;
+    margin: 1.5em auto;
+    padding: 10px;
+    text-align: left;
+    width: 40%;
+}
+.mod-singular-options {
+    border-top: 1px solid #fff;
+    font-size: 90%;
+    margin: 1.5em auto;
+    overflow: hidden;
+    text-align: left;
+    width: 60%;
+}
+.mod-singular-options-name {
+    clear: both;
+    float: left;
+    padding: 1em 0;
+    width: 12em;
+}
+.mod-singular-options-txt {
+    border-bottom: 1px solid #fff;
+    padding: 1em 0 1em 12.5em;
+}
+.mod-singular-pager {
+    padding-top: 15px;
+    text-align: center;
+}
+.mod-singular-pager a {
+    background: #f5f5f5;
+    -webkit-border-radius: 25px;
+    border-radius: 25px;
+    display: inline-block;
+    height: 50px;
+    margin: 0 15px;
+    overflow: hidden;
+    position: relative;
+    text-indent: 100%;
+    white-space: nowrap;
+    width: 50px;
+}
+.mod-singular-pager a:before {
+    border-top: 5px solid #ed0b48;
+    border-left: 5px solid #ed0b48;
+    content: "";
+    display: block;
+    height: 14px;
+    left: 50%;
+    position: absolute;
+    top: 50%;
+    width: 14px;
+}
+.mod-singular-prev:before {
+    -webkit-transform: rotate(45deg);
+    -moz-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    -o-transform: rotate(45deg);
+    transform: rotate(45deg);
+    margin: -7px 0 0 -10px;
+}
+.mod-singular-next:before {
+    -webkit-transform: rotate(-135deg);
+    -moz-transform: rotate(-135deg);
+    -ms-transform: rotate(-135deg);
+    -o-transform: rotate(-135deg);
+    transform: rotate(-135deg);
+    margin: -13px 0 0 -10px;
+}
+
+.mod-nav {
+    margin-top: -90px;
+    position: fixed;
+    right: 20px;
+    top: 50%;
+}
+.mod-nav-list {}
+.mod-nav-item {
+    margin: 20px 0;
+}
+.mod-nav-item a {
+    background: #f5f5f5;
+    -webkit-border-radius: 0px;
+    border-radius: 0px;
+    display: block;
+    height: 10px;
+    width: 10px;
+    overflow: hidden;
+    text-indent: 100%;
+    white-space: nowrap;
+}
+.mod-nav-item a:hover,
+.mod-nav-item a:focus,
+.mod-nav-item.js-singular-active a {
+    background: #ed0b48;
+}
+/**********/
+/* Custom */
+/**********/
+div.transbox {
+    width: 100%;
+    height: 50%;
+    margin: 0px;
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #080808;
+    opacity: 0.5;
+    filter: alpha(opacity=50); /* For IE8 and earlier */
+}
+#salavon {
+    position: absolute;
+    bottom: 15px;
+    right: 30px;
+}
+#salavon p a {
+    text-decoration: none;
+    color: white;
+}
+#salavon p a:hover {
+    text-decoration: none;
+    color: #ed0b48;
+}
+.mod-singular-subttl {
+    font-size: 200%;
+}
+h2.mod-singular-hdng {
+    font-size: 40px;
+    margin-bottom: 20px;
+    text-align: left;
+}
+.container {
+    position: relative;
+}
+.bottom-right {
+    position: absolute;
+    top: 90px;
+    /*    right: 16px;*/
+    left: 380px;
+    text-align: justify !important;
+}
+#sec02, #sec03, #sec04, #sec05, #sec06, #sec07 {
+    padding-left: 20%;
+    padding-right: 20%;
+    color: black;
+}
+.mod-singular-txt-2, .mod-singular-txt-3 {
+    margin-bottom: 10px;
+    margin-right: 10%;
+}
+#sec03 > .mod-singular-section-in, #sec02 > .mod-singular-section-in, .mod-singular-txt-2, .mod-singular-txt-3 {
+    text-align: left;
+}
+.container-4 {
+    border: 1px solid black;
+}
+.grid-container {
+    display: grid;
+    grid-template-columns: 50% 50%;
+    padding: 0px;
+}
+.grid-item {
+    background-color: rgba(255, 255, 255, 0.8);
+/*    border: 1px solid rgba(0, 0, 0, 0.8);*/
+    padding: 3px;
+    font-size: 30px;
+    text-align: center;
+}
+.slider-width {
+    width: 35%;
+}
+#range {
+    position: absolute;
+    color:rgba(255, 255, 255, 0);
+}
