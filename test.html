@@ -1,83 +1,102 @@
 <!doctype html>
 <html lang="en">
-<head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>jQuery UI Droppable - Accept</title>
-<!--  <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">-->
-  <link rel="stylesheet" href=jquery_ui.css>
-<!--  <link rel="stylesheet" href="/resources/demos/style.css">-->
-  <style>
-  #droppable-a, #droppable-b { width: 300px; height: 400px; padding: 0.5em; float: left; margin: 10px; }
-  #draggable-a,#draggable-b , #draggable-nonvalid-a, #draggable-nonvalid-b { width: 80px; height: 90px; padding: 0.5em; float: left; margin: 10px 10px 10px 0; }
-  </style>
-  <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-  <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-  <script>
-  $( function() {
-    $( "#draggable-a, #draggable-b, #draggable-nonvalid-a, #draggable-nonvalid-b" ).draggable();
-    
-    $( "#droppable-a" ).droppable({
-      accept: "#draggable-a",
-      classes: {
-        "ui-droppable-active": "ui-state-active-a",
-        "ui-droppable-hover": "ui-state-hover-a"
-      },
-      drop: function( event, ui ) {
-        $( this )
-          .addClass( "ui-state-highlight-a" )
-          .find( "p" )
-            .html( "Dropped!" );
-      }
-    });
-    
-        $( "#droppable-b" ).droppable({
-      accept: "#draggable-b",
-      classes: {
-        "ui-droppable-active": "ui-state-active-b",
-        "ui-droppable-hover": "ui-state-hover-b"
-      },
-      drop: function( event, ui ) {
-        $( this )
-          .addClass( "ui-state-highlight-b" )
-          .find( "p" )
-            .html( "Dropped!" )
-      }
-    });
-    
-    
-  } );
-  </script>
-</head>
-<body>
- 
+    <head>
+        <meta charset="utf-8">    
+        <link rel="stylesheet" href="css/test.css">
+        <script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+        <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+        <script>
+            $( function() {
+                $( "#draggable-a, #draggable-b, #draggable-nonvalid-a, #draggable-nonvalid-b" ).draggable();
+
+                $( "#droppable-a" ).droppable({
+                    accept: "#draggable-a",
+                    classes: {
+                        "ui-droppable-active": "ui-state-active-a",
+                        "ui-droppable-hover": "ui-state-hover-a"
+                    },
+                    drop: function( event, ui ) {
+                        $( this )
+                            .addClass( "ui-state-highlight-a" )
+                            .find( "p" )
+                            .html( "" );
+                    }
+                });
+                $( "#droppable-b" ).droppable({
+                    accept: "#draggable-b",
+                    classes: {
+                        "ui-droppable-active": "ui-state-active-b",
+                        "ui-droppable-hover": "ui-state-hover-b"
+                    },
+                    drop: function( event, ui ) {
+                        $( this )
+                            .addClass( "ui-state-highlight-b" )
+                            .find( "p" )
+                            .html( "" )
+                    }
+                });
+            } );
+        </script>
+    </head>
+    <body>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+
+        <!--
 <div id="draggable-nonvalid-a" class="ui-widget-content">
-  <p>I'm draggable but can't be dropped</p>
+<p>I'm draggable but can't be dropped</p>
 </div>
-<!--
+
 <div id="draggable-nonvalid-b" class="ui-widget-content">
-  <p>I'm draggable but can't be dropped</p>
+<p>I'm draggable but can't be dropped</p>
 </div>
 -->
-<div id="draggable-a" class="ui-widget-content">
-  <p>Drag me to my target</p>
-</div>
- 
-<div id="draggable-a" class="ui-widget-content", style="background-image: url('images/mens_health1.jpg'); background-size: cover; background-repeat: no-repeat;">
-
-</div>
-
- 
-<div id="droppable-a" class="ui-widget-header">
-  <p>accept: '#draggable'</p>
-</div>
-<div id="droppable-b" class="ui-widget-header">
-  <p>accept: '#draggable'</p>
-</div>
-<div id="draggable-b" class="ui-widget-content" style="background-image: url('images/womens_health1.jpg'); background-size: cover; background-repeat: no-repeat;">
-  
-</div>
- 
- 
-</body>
+        <div class="magazine-grid-container-5">
+            <div class="magazine-grid-item-5">
+                <div class="magazine-grid-container-a">
+                    <div class="magazine-grid-item">
+                        <div id="draggable-a" class="ui-widget-content menshealth"></div>
+                    </div>
+                    <div class="magazine-grid-item">
+                        <div id="draggable-a" class="ui-widget-content usa"></div>
+                    </div>
+                    <div class="magazine-grid-item">
+                        <div id="draggable-a" class="ui-widget-content japan"></div>
+                    </div>  
+                    <div class="magazine-grid-item">
+                        <div id="draggable-a" class="ui-widget-content italia"></div>
+                    </div>  
+                </div>
+            </div>
+            <div class="magazine-grid-item-5">
+                <div id="droppable-a" class="ui-widget-header" style="display: inline-block">
+                    <p>Drag a magazine here</p>
+                </div>
+            </div>
+            <div class="magazine-grid-item-5">
+                <div id="droppable-b" class="ui-widget-header" style="display: inline-block;">
+                    <p>Drag a magazine here</p>
+                </div>
+            </div>
+            <div class="magazine-grid-item-5">
+                <div class="magazine-grid-container-b">
+                    <div class="magazine-grid-item">
+                        <div id="draggable-b" class="ui-widget-content womenshealth"></div>
+                    </div>
+                    <div class="magazine-grid-item">
+                        <div id="draggable-b" class="ui-widget-content placeholder"></div>
+                    </div>
+                    <div class="magazine-grid-item">
+                        <div id="draggable-b" class="ui-widget-content placeholder"></div>
+                    </div>  
+                    <div class="magazine-grid-item">
+                        <div id="draggable-b" class="ui-widget-content placeholder"></div>
+                    </div>  
+                </div>
+            </div>
+        </div>    
+    </body>
 </html>
