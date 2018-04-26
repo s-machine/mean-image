@@ -93,7 +93,7 @@
           <div class="grid-container">
             <!--slider image-->
             <div class="grid-item">
-              <img id="img" width="300">
+              <img id="faces" width="300">
             </div>
             <!--final image-->
             <div class="grid-item">
@@ -113,16 +113,16 @@
             </div> 
           </div>
           <script>
-            var val = document.getElementById("valR").value;
-            document.getElementById("range").innerHTML=val;
+            var val = $("#valR").val();
+            $("#range").html=val;
             var numImages = 10;
-            document.getElementById("img").src = "images/mean_faces_" + numImages + ".png";
+            $("#faces").attr("src", "images/mean_faces_" + numImages + ".png");
             function showVal(newVal){
-              numImagesArr=[10, 50, 100, 500, 1000, 2414]
+              numImagesArr=["10", "50", "100", "500", "1000", "2414"]
               numImages=numImagesArr[newVal];
-              document.getElementById("range").innerHTML=newVal;
-              document.getElementById("realval").innerHTML=numImages;
-              document.getElementById("img").src = "images/mean_faces_" + numImages + ".png";
+              $("#range").html(newVal);
+              $("#realval").html(numImagesArr[newVal]);
+              $("#faces").attr("src", "images/mean_faces_" + numImages + ".png");
             }
           </script>
           <!--next_page_button-->
@@ -134,8 +134,28 @@
 <!--page_5 History-->
       <section id="sec05" class="mod-singular-section">
         <div class="mod-singular-section-in">
-          <h2 class="mod-singular-hdng">Section 6</h2>
-          
+          <h2 class="mod-singular-hdng">History of time</h2>
+                    <div class="grid-container">
+            <!--slider image-->
+            <div>
+              <img id="time-magazine" width="300">
+            </div>
+            <!--slider+caption-->
+            <div class="grid-item">
+              <input class="slider-width" id="year" type="range" min="1923" max="2018" value="0" step="1" oninput="changeTimeCover(this.value)" onchange="changeTimeCover(this.value)" />
+              <div class="grid-item face-number">
+              </div>
+            </div>  
+          </div>
+          <script>
+            var year = $("#year").val();
+            var timeCover = "/images/time/Time-" + year + ".jpg" ;
+            $("#time-magazine").attr("src", timeCover);
+            function changeTimeCover(year){
+              var timeCover = "/images/time/Time-" + year + ".jpg" ;
+              $("#time-magazine").attr("src", timeCover);
+            }
+          </script>
           <!--next_page_button-->
           <p class="mod-singular-pager"><a href="" class="mod-singular-next js-singular-next"></a></p>
           <!--next_page_button-->
@@ -174,7 +194,7 @@
             } );
           </script>
           <h2 class="mod-singular-hdng">Can you spot any differences in these magazines?</h2>
-          <div class="magazine-grid-container-5">
+          <div class="magazine-grid-container-5 comparison-container">
             
             <!--draggable covers a-->
             <div class="magazine-grid-item-5">

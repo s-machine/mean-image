@@ -268,8 +268,11 @@ a {
 .mod-singular-subttl {
     font-size: 200%;
 }
-h2.mod-singular-hdng {
-    font-size: 40px;
+.mod-singular-hdng {
+    font-size: 2.5em;
+    
+    
+    margin-top: 0;
     margin-bottom: 20px;
     text-align: left;
 }
@@ -367,4 +370,11 @@ div .salavon-images{
 #range {
     position: absolute;
     color:rgba(255, 255, 255, 0);
+}
+
+
+/*magazine containers*/
+.comparison-container{
+  position: absolute;
+  left: 1.5%;
 }
