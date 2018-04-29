@@ -12,6 +12,7 @@
 <script src="js/jquery.easing.js"></script>
 <script src="js/jquery.singular.js"></script>
 <script src="js/isotope.pkgd.min.js"></script>
+<script src="js/hexcodeToValue.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/d3.v4.js"></script>
 <script>
   $(function() {
@@ -111,7 +112,7 @@
                 .append("svg")
                 .attr("class","salavon-bar")
                 .attr("width", 1000)
-                .attr("height", 25);
+                .attr("height", 75);
                 
             d3.json("data/salavon.json", function(error,data){
               if (error) throw error;
@@ -125,14 +126,13 @@
                 .attr("x",function(d,i){return startX+i*(img_width/listLength)})
                 .attr("y","0")
                 .attr("fill", function(d,i){return d})
-                .transition("500")
-                .attr("height","25");
+                .transition("1000")
+                .attr("height",function(d,i){return hexToValue(d)*75});
+              $("svg").translate
             })
-          });
-          
-          $('.salavon-photo').mouseout(function(){
+          }).mouseout(function(){
             d3.select("#sec02").selectAll("rect")
-                  .transition("500")
+                  .transition("1000")
                   .attr("height","0")
                   .remove();
             
@@ -253,8 +253,8 @@
                 .enter()
                 .append("rect")
                 .attr("height","1.07")
-                .attr("width","25")
-                .attr("x","45")
+                .attr("width", function(d,i){return hexToValue(d)*100})
+                .attr("x",function(d,i){ return 100 - hexToValue(d)*100})
                 .attr("y",function(d,i){ return i*1.07})
                 .attr("fill", function(d,i){return d});
             });
@@ -280,11 +280,12 @@
                   .attr("height","1.07")
                   .attr("y",function(d,i){ return i*1.07})
                   .attr("fill", function(d,i){return d})
-                  .attr("x","70")
+                  .attr("x","100")
                   .attr("width","0")
-                  .transition("500")
+                  .transition("1000")
                   .attr("x","45")
-                  .attr("width","25");
+                  .attr("width", function(d,i){return hexToValue(d)*100})
+                  .attr("x",function(d,i){return 100 - hexToValue(d)*100});
             });
             }
 
