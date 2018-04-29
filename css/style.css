@@ -32,8 +32,8 @@ time, mark, audio, video {
   vertical-align: baseline;
 }
 
-h1, #sec01 h2{
-  color: #d3d3d3;
+h1{
+  color: #ea8080;
   font-weight: bold;
 }
 
@@ -356,7 +356,7 @@ div .salavon-images{
     width: 20px;
     height: 20px;
     border-radius: 50%; 
-    background: #6c6c6c;
+    background: #ea8080;
     cursor: pointer;
 }
 
@@ -366,7 +366,7 @@ div .salavon-images{
     width: 20px;
     height: 20px;
     border-radius: 50%; 
-    background: #6c6c6c;
+    background: #ea8080;
     cursor: pointer;
 }
 
@@ -376,7 +376,7 @@ div .salavon-images{
   width: 20px;
   height: 20px;
   border-radius: 50%; 
-  background: #6c6c6c;
+  background: #ea8080;
   cursor: pointer;
 }
 
