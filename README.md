@@ -8,7 +8,7 @@ Our goal is to analyze mean images within topics that illustrate modern culture 
 
 Through the process of finding a mean image, the generality and universality of trends and moments in time becomes evident. Work inspired by the art of [Jason Salavon](www.salavon.com).
 
-![Time](/images/time/small_time.png) ![Time](/images/time/small_womens.png)
+![Time](./images/time/small_time.png) ![Womens Health](./images/time/small_womens.png)
 
 ### Code
 Mean images are rendered using a Python scripts in the `/data` folder of this repo.
