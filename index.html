@@ -5,9 +5,8 @@
 <meta charset="utf-8">
 <title>Mean Images</title>
 <link rel="stylesheet" href="css/style.css">
-<link rel="stylesheet" href="css/test.css">
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
+<link rel="stylesheet" href="css/drag-drop.css">
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
 <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 <script src="js/jquery.mousewheel.min.js"></script>
 <script src="js/jquery.easing.js"></script>
@@ -26,7 +25,6 @@
       mousewheel: true,
       easing: 'easeInOutQuart',
       scrollEnd: function(elem) {
-      console.log('scrollEnd');
       }
     });
   });
@@ -64,11 +62,84 @@
           <p class="mod-singular-txt-2">
             This project is inspired by the artwork of contemporary artist <a href="http://www.salavon.com" target="_blank">Jason Salavon</a> whose series <a href="http://salavon.com/work/SpecialMoments/" target ="_blank">"100 Special Moments”</a> is shown below. Salavon is known for using computer software to reconfigure existing media into fine art. His series on averaged images straddles the boundary between art and data visualization, often revealing never-before-seen patterns in the pixels captured in photographs.
           </p>
-          <a href="http://salavon.com/work/SpecialMoments/" target="_blank"><img src="images/100moments.png" width="700"></a>
+          <div class="salavon-grid">
+          <a href="http://salavon.com/work/SpecialMoments/" target="_blank">
+            <img src="images/salavon/100moments-1.jpg" height="200" class="salavon-photo" id="S-1"></a>
+          <a href="http://salavon.com/work/SpecialMoments/" target="_blank">
+            <img src="images/salavon/100moments-2.jpg" height="200" class="salavon-photo" id="S-2"></a>
+          <a href="http://salavon.com/work/SpecialMoments/" target="_blank">
+            <img src="images/salavon/100moments-3.jpg" height="200" class="salavon-photo" id="S-3"></a>
+          <a href="http://salavon.com/work/SpecialMoments/" target="_blank">
+            <img src="images/salavon/100moments-4.jpg" height="200" class="salavon-photo" id="S-4"></a>
+          </div>
           <!--next_page_button-->
           <p class="mod-singular-pager"><a href="" class="mod-singular-next js-singular-next"></a></p>
           <!--next_page_button-->
         </div>
+        <!--javascript-image-layout-->
+        <script>
+        var $grid = $('.salavon-grid').isotope({
+          // main isotope options
+          itemSelector: '.salavon-photo',
+          // set layoutMode
+          layoutMode: 'fitRows',
+          // options for cellsByRow layout mode
+          fitRows: {
+            gutter: 5,
+            rowHeight: 150
+          },
+          // options for masonry layout mode
+        })
+        </script>
+        <!--javascript-d3-graphics-->
+        <script>
+          
+          function getSum(total, num){
+            return total + num;
+          }
+          $('.salavon-photo').mouseover(function(){
+            var id = Number($(this).attr("id")[2]); 
+            //not making it responsive... magic numbers
+            widthArray = [151,159,131,250]
+            var img_width = widthArray[id-1];
+            if (id == 1) startX = 0;
+            else{
+            var startX = widthArray.slice(0,id-1).reduce(getSum) + 5*(id-1);
+            }
+            
+            var barChart = d3.select(".salavon-grid")
+                .append("svg")
+                .attr("class","salavon-bar")
+                .attr("width", 1000)
+                .attr("height", 25);
+                
+            d3.json("data/salavon.json", function(error,data){
+              if (error) throw error;
+              let listLength = data[id-1].colorList.length;
+              barChart.selectAll("rect")
+                .data(data[id-1].colorList)
+                .enter()
+                .append("rect")
+                .attr("height","0")
+                .attr("width",function(d,i){return img_width/listLength})
+                .attr("x",function(d,i){return startX+i*(img_width/listLength)})
+                .attr("y","0")
+                .attr("fill", function(d,i){return d})
+                .transition("500")
+                .attr("height","25");
+            })
+          });
+          
+          $('.salavon-photo').mouseout(function(){
+            d3.select("#sec02").selectAll("rect")
+                  .transition("500")
+                  .attr("height","0")
+                  .remove();
+            
+
+        });
+        
+        </script>
       </section>
 
 <!--page_3 Faces-->
@@ -98,7 +169,10 @@
             </div>
             <!--final image-->
             <div class="grid-item">
-              <img src="images/mean_faces_2414.png" width="300">
+              <img src="images/mean_faces/mean_faces_2414.png" width="300">
+            </div>
+            <div class="gird-item">
+            <p class="grid-item converge-txt">some text about converging point. Please add...</p>
             </div>
             <!--slider+caption-->
             <div class="grid-item">
@@ -106,25 +180,30 @@
               <span id="range">0</span>
               <div class="grid-item face-number">
                 <span id="realval">10</span>
-                <span id="">faces</span>
+                <span>faces</span>
               </div>
             </div>  
             <div class="grid-item face-number fn2">
               2414 faces
-            </div> 
+            </div>
+            
           </div>
           <script>
             var val = $("#valR").val();
             $("#range").html=val;
             var numImages = 10;
-            $("#faces").attr("src", "images/mean_faces_" + numImages + ".png");
+            $("#faces").attr("src", "images/mean_faces/mean_faces_" + numImages + ".png");
             function showVal(newVal){
+              if (newVal >= 2){ 
+                $(".converge-txt").animate({opacity: '1'},"slow");
+              }
               numImagesArr=["10", "50", "100", "500", "1000", "2414"]
               numImages=numImagesArr[newVal];
               $("#range").html(newVal);
               $("#realval").html(numImagesArr[newVal]);
-              $("#faces").attr("src", "images/mean_faces_" + numImages + ".png");
+              $("#faces").attr("src", "images/mean_faces/mean_faces_" + numImages + ".png");
             }
+
           </script>
           <!--next_page_button-->
           <p class="mod-singular-pager"><a href="" class="mod-singular-next js-singular-next"></a></p>
@@ -135,32 +214,27 @@
 <!--page_5 History-->
       <section id="sec05" class="mod-singular-section">
         <div class="mod-singular-section-in">
-          <h2 class="mod-singular-hdng">History of time</h2>
+          <h2 class="mod-singular-hdng">Can you tell? History through mean images</h2>
           <div class="time-container">
             <!--slider image-->
             <div class="time-div">
               <img id="time-magazine" height="400">
-            </div>
-            <p class="year" id="time-cap">1923</p>
+              <p id="time-cap">1923</p>
             <!--slider+caption-->
-            <div class="time-slider-cap">
-              <input class="slider-width" id="year" type="range" min="1923" max="2018" value="0" step="1" oninput="changeTimeCover(this.value)" onchange="changeTimeCover(this.value)" />
+              <input class="slider-width time-slider" id="year" type="range" min="1923" max="2018" value="0" step="1" oninput="changeAll(this.value)" />
+              <div id="slider-range-max"></div>
+              <span class="speech-bubble"></span>
+              <p class="time-intro">The mean image on the right is generated from the all the <i>Time</i> Magazines in a year, from its foundation till now. See if you can identify any historical events/figures from the mean images.<br><br>Please pick a few years that you can recognize something and shoot me a note. I'll add notes one I have it lol</p>
             </div>  
           </div>
           
           <!--change_cover+D3_bar_chart-->
-          <script>
+          <script>      
             //change_cover
             var year = $("#year").val();
             var timeCover = "images/time/Time-" + year + ".jpg" ;
             $("#time-magazine").attr("src", timeCover);
-            
-            function changeTimeCover(year){
-              var timeCover = "images/time/Time-" + year + ".jpg" ;
-              $("#time-magazine").attr("src", timeCover);
-              $(".year").html(year);
-            }
-            
+                        
             //D3_bar_chart
             var barChart = d3.select(".time-container")
               .insert("svg",":first-child")
@@ -168,27 +242,56 @@
                 .attr("width", 100)
                 .attr("height", 500)
 
-            var beginYear = 1923;
-            var index = year - beginYear;
-
-            d3.json("js/time.json",function(error, data){
-            barChart.selectAll("rect")
-              .data(data[index].colorList)
-              .enter()
-              .append("rect")
-              .attr("height","1.07")
-              .attr("width","25")
-              .attr("x",function(){return (100/2)-(10/2)})
-              .attr("y",function(d,i){ return i*1.07})
-              .attr("fill", function(d,i){return d});
+            //load bar-chart
+            d3.json("data/time.json",function(error, data){
+              if (error) throw error;
+              barChart.selectAll("rect")
+                  .remove();
+              
+              barChart.selectAll("rect")
+                .data(data[0].colorList)
+                .enter()
+                .append("rect")
+                .attr("height","1.07")
+                .attr("width","25")
+                .attr("x","45")
+                .attr("y",function(d,i){ return i*1.07})
+                .attr("fill", function(d,i){return d});
             });
-          
-            //border around the chart
-            $(".stacked-bar").prepend
-            (`<svg class="stacked-bar" width="100" height="400">
-                <rect x="45" y="0" width="25" height="398.04" 
-                style="fill:transparent;stroke-width:2;stroke:rgba(0,0,0,.2)"/>
-              </svg>`)
+            
+            function changeTimeCover(year){
+                var timeCover = "images/time/Time-" + year + ".jpg" ;
+                $("#time-magazine").attr("src", timeCover);
+                $("#time-cap").html(year);
+              }
+
+            function changeBar(year){
+              var index = year - 1923;
+              
+              d3.json("data/time.json",function(error, data){
+              if (error) throw error;
+              barChart.selectAll("rect")
+                  .remove();
+
+              barChart.selectAll("rect")
+                  .data(data[index].colorList)
+                  .enter()
+                  .append("rect")
+                  .attr("height","1.07")
+                  .attr("y",function(d,i){ return i*1.07})
+                  .attr("fill", function(d,i){return d})
+                  .attr("x","70")
+                  .attr("width","0")
+                  .transition("500")
+                  .attr("x","45")
+                  .attr("width","25");
+            });
+            }
+
+            function changeAll(year){
+              changeTimeCover(year);
+              changeBar(year);
+            }
           </script>
 
           <!--next_page_button-->
@@ -200,53 +303,31 @@
 <!--page_6 Comparison-->
       <section id="sec06" class="mod-singular-section">
         <div class="mod-singular-section-in">
-          <script>
-            $( function() {
-              $( "#draggable-a, #draggable-b, #draggable-nonvalid-a, #draggable-nonvalid-b" ).draggable();
-              $( "#droppable-a" ).droppable({
-                accept: "#draggable-a",
-                classes: {
-                  "ui-droppable-active": "ui-state-active-a",
-                  "ui-droppable-hover": "ui-state-hover-a"
-                },
-                drop: function(event,ui) {
-                  $(this).addClass("ui-state-highlight-a")
-                           .find("p")
-                           .html("");
-                }
-              });
-              $( "#droppable-b" ).droppable({
-                accept: "#draggable-b",
-                classes: {
-                  "ui-droppable-active": "ui-state-active-b",
-                  "ui-droppable-hover": "ui-state-hover-b"
-                },
-                drop: function(event,ui){
-                  $(this).addClass("ui-state-highlight-b")
-                           .find("p")
-                           .html("")}
-              });
-            } );
-          </script>
-          <h2 class="mod-singular-hdng">Can you spot any differences in these magazines?</h2>
-          <div class="magazine-grid-container-5 comparison-container">
-            
+          <h2 class="mod-singular-hdng">Social norms and culture, through mean image </h2>
+
+          <span id="filters" class="button-group">
+              <button class="button" data-filter="*">Explore All</button>
+              <button class="button" data-filter=".mvw">Men vs Women</button>
+              <button class="button" data-filter=".countries">Magazines in different countries</button>
+            </span>
+          <div class="magazine-grid-container-5 comparison-container">            
             <!--draggable covers a-->
             <div class="magazine-grid-item-5">
-              <div class="magazine-grid-container-a">
-                <div class="magazine-grid-item">
+              
+              <div class="magazine-grid-container-a magazines">
+                <div class="magazine-grid-item  mvw">
                   <div id="draggable-a" class="ui-widget-content menshealth"></div>
                 </div>
                 
-                <div class="magazine-grid-item">
+                <div class="magazine-grid-item countries">
                   <div id="draggable-a" class="ui-widget-content usa"></div>
                 </div>
                 
-                <div class="magazine-grid-item">
+                <div class="magazine-grid-item countries">
                   <div id="draggable-a" class="ui-widget-content japan"></div>
                 </div>
                 
-                <div class="magazine-grid-item">
+                <div class="magazine-grid-item  countries">
                   <div id="draggable-a" class="ui-widget-content italia"></div>
                 </div>
               </div>
@@ -266,26 +347,84 @@
             
             <!--draggable covers b-->
             <div class="magazine-grid-item-5">
-              <div class="magazine-grid-container-b">
+              <div class="magazine-grid-container-b magazines">
                 
-                <div class="magazine-grid-item">
+                <div class="magazine-grid-item mvw">
                   <div id="draggable-b" class="ui-widget-content womenshealth"></div>
                 </div>
                 
-                <div class="magazine-grid-item">
+                <div class="magazine-grid-item mvw">
                   <div id="draggable-b" class="ui-widget-content placeholder"></div>
                 </div>
                 
-                <div class="magazine-grid-item">
+                <div class="magazine-grid-item mvw">
                   <div id="draggable-b" class="ui-widget-content placeholder"></div>
                 </div>  
 
-                <div class="magazine-grid-item">
+                <div class="magazine-grid-item countries">
                   <div id="draggable-b" class="ui-widget-content placeholder"></div>
                 </div>  
               </div>
             </div>
           </div> 
+          <!--filter-->
+          <script>
+          // init Isotope
+          var $gallery = $('.magazines').isotope({
+            itemSelector: '.magazine-grid-item',
+            llayoutMode: 'cellsByRow',
+            cellsByRow: {
+              columnWidth: 1100,
+              rowHeight: 110
+            }
+          });
+
+          // bind filter button click
+          $('.button-group').on( 'click', 'button', function() {
+            var filterValue = $( this ).attr('data-filter');
+            $gallery.isotope({ filter: filterValue });
+          });
+
+          // change is-checked class on buttons
+          $('.buttons').each( function( i, buttonGroup ) {
+            var $buttonGroup = $( buttonGroup );
+            $buttonGroup.on( 'click', 'button', function() {
+              $buttonGroup.find('.is-checked').removeClass('is-checked');
+              $( this ).addClass('is-checked');
+            });
+          });
+          </script>
+          <!--drag and drop-->
+          <script>
+            $( function() {
+              $("#draggable-a, #draggable-b, #draggable-nonvalid-a, #draggable-nonvalid-b").draggable({ revert: "valid" });
+              
+              $( "#droppable-a" ).droppable({
+                accept: "#draggable-a",
+                classes: {
+                  "ui-droppable-active": "ui-state-active-a",
+                  "ui-droppable-hover": "ui-state-hover-a"
+                },
+                drop: function(event,ui) {
+                  $(this).addClass("ui-state-highlight-a")
+                           .find("p")
+                           .html("");
+                }
+              });
+
+              $( "#droppable-b" ).droppable({
+                accept: "#draggable-b",
+                classes: {
+                  "ui-droppable-active": "ui-state-active-b",
+                  "ui-droppable-hover": "ui-state-hover-b"
+                },
+                drop: function(event,ui){
+                  $(this).addClass("ui-state-highlight-b")
+                           .find("p")
+                           .html("")}
+              });
+            } );
+          </script>
           <!--next_page_button-->
           <p class="mod-singular-pager"><a href="" class="mod-singular-next js-singular-next"></a></p>
           <!--next_page_button-->
@@ -295,12 +434,50 @@
 <!--page_7 Exploratory-->  
       <section id="sec07" class="mod-singular-section">
         <div class="mod-singular-section-in">
-          <h2 class="mod-singular-hdng">Section 7</h2>
+          <h2 class="mod-singular-hdng">Explore more mean images!</h2>
+       <div class="exploratory">
+          <a href="http://www.laurainthekitchen.com/recipe-category.php?category=BEVERAGE" 
+          class="ex-container" target="_blank">
+            <img src="images/exploratory/BEVERAGE.jpg" height="200" class="exploratory-photo food">
+            <h2 class="img-name">Beverages</h2>
+         </a>
+          <a href="https://www.youtube.com/user/billwurtz" class="ex-container" target="_blank">
+            <img src="images/exploratory/Bill%20Wurtz.jpg" height="200" class="exploratory-photo youtube">
+            <h2 class="img-name">Bill Wurtz</h2>
+         </a>
+          <a href="https://www.youtube.com/user/TheFineBros" class="ex-container" target="_blank">
+            <img src="images/exploratory/React.jpg" height="200" class="exploratory-photo youtube">
+            <h2 class="img-name">React Videos</h2>
+         </a>
+          <a href="https://www.youtube.com/results?search_query=73+questions" 
+          class="ex-container" target="_blank">
+            <img src="images/exploratory/vogue-73-questions.jpg" height="200" class="exploratory-photo youtube">
+            <h2 class="img-name">73 Questions</h2>
+         </a>
+          </div>
           
           <!--next_page_button-->
           <p class="mod-singular-pager"><a href="" class="mod-singular-prev js-singular-prev"></a></p>
           <!--next_page_button-->
         </div>
+        <script>
+        var $grid = $('.exploratory').isotope({
+          // main isotope options
+          itemSelector: '.ex-container',
+          // set layoutMode
+          layoutMode: 'masonry',
+          masonry: {
+            columnWidth: 45,
+            gutter:10
+          }
+        })
+        
+        $(".ex-container").mouseover(function(){
+          $(this).find(".img-name").animate({opacity: 1},'fast');
+        }).mouseleave(function(){
+          $(this).find(".img-name").animate({opacity: 0},'fast');
+        });
+        </script>
       </section>
     
     </div>
