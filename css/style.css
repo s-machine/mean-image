@@ -449,8 +449,12 @@ div .salavon-images{
 
 .stacked-bar{
   position:absolute;
-  right: 99%;
+  right: 102%;
   top:0%;
+}
+.salavon-bar{
+  position:absolute;
+  top: 103%;
 }
 
 .time-slider{
