@@ -302,8 +302,14 @@ a, em{
   text-align: left;
   position: relative;
 }
-div .salavon-images{
+.salavon-grid a img{
   margin-top: 2.5%;
+  filter:grayscale(100%);
+  -webkit-filter:grayscale(100%);
+}
+.salavon-grid a img:hover{
+  filter:none;
+  -webkit-filter:grayscale(0%);
 }
 .container {
   position: relative;
@@ -635,13 +641,17 @@ div .salavon-images{
 .button-group .button:last-child { border-radius: 0 0.5em 0.5em 0; }
 
 /*****************sec07*******************/
-
+.exploratory{
+  width: 110%;
+}
 .ex-container{
   position:relative;
-  overflow:hidden;
+  overflow:visible;
   left: -50%;
   -webkit-transition: all .4s ease-in-out;
   transition: all .4s ease-in-out;
+  filter:grayscale(100%);
+  -webkit-filter:grayscale(100%);
 }
 
 .exploratory .ex-container .img-name {
@@ -658,7 +668,21 @@ div .salavon-images{
   -webkit-transform: scale(1.3);
   transform: scale(1.3);
   z-index: 1;
+  opacity:1;
+  filter:none;
+  -webkit-filter:grayscale(0%);
   position:relative;   
   -webkit-transition: all .4s ease-in-out;
   transition: all .4s ease-in-out;
+}
+
+.ex-bar{
+  position:absolute;
+  left:-25px;
+  top:0;
+}
+
+#sec07 h3{
+  text-align: left;
+  margin-bottom: 25px;
 }
