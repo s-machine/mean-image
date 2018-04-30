@@ -12,6 +12,7 @@
 <script src="js/jquery.easing.js"></script>
 <script src="js/jquery.singular.js"></script>
 <script src="js/isotope.pkgd.min.js"></script>
+<script src="js/packery-mode.pkgd.min.js"></script>
 <script src="js/hexcodeToValue.js" type="text/javascript"></script>
 <script type="text/javascript" src="js/d3.v4.js"></script>
 <script>
@@ -350,7 +351,7 @@ $(function() {
                             .html("Welcome to today. Can you spot this cover? ;)");
                                     $(".feature-img img").remove();
                         $(".feature-img").animate({opacity: '1'},"fast")
-                        .prepend('<img id="tr*mp" src="./images/fuck_trump.jpg" style="width:200px" style="width:350px" />');
+                        .prepend('<img id="tr*mp" src="./images/trump.jpg" style="width:200px" style="width:350px" />');
 //                                    $(".feature-img img").remove();
 
                     }
@@ -513,41 +514,54 @@ $(function() {
 
     <!--page_7 Exploratory-->  
     <section id="sec07" class="mod-singular-section">
-        <div class="mod-singular-section-in">
-            <h2 class="mod-singular-hdng">Explore more mean images!</h2>
-            <div class="exploratory">
-                <a href="http://www.laurainthekitchen.com/recipe-category.php?category=BEVERAGE" 
-                   class="ex-container" target="_blank">
-                    <img src="images/exploratory/BEVERAGE.jpg" height="200" class="exploratory-photo food">
-                    <h2 class="img-name">Beverages</h2>
-                </a>
-                <a href="https://www.youtube.com/user/billwurtz" class="ex-container" target="_blank">
-                    <img src="images/exploratory/Bill%20Wurtz.jpg" height="200" class="exploratory-photo youtube">
-                    <h2 class="img-name">Bill Wurtz</h2>
-                </a>
-                <a href="https://www.youtube.com/user/TheFineBros" class="ex-container" target="_blank">
-                    <img src="images/exploratory/React.jpg" height="200" class="exploratory-photo youtube">
-                    <h2 class="img-name">React Videos</h2>
-                </a>
-                <a href="https://www.youtube.com/results?search_query=73+questions" 
-                   class="ex-container" target="_blank">
-                    <img src="images/exploratory/vogue-73-questions.jpg" height="200" class="exploratory-photo youtube">
-                    <h2 class="img-name">73 Questions</h2>
-                </a>
-            </div>
+      <div class="mod-singular-section-in">
+        <h2 class="mod-singular-hdng">More mean images!</h2>
+          <h3>Put your mouse over the images to find out what the topics are.</h3>
+          <div class="exploratory">
+            <a href="http://www.laurainthekitchen.com/recipe-category.php?category=BEVERAGE" class="ex-container  Beverage.jpg" target="_blank">
+                <img src="images/exploratory/Beverage.jpg" height="200" class="exploratory-photo food">
+                <h2 class="img-name">Beverages</h2>
+            </a>
+            <a href="https://www.instagram.com/icecream/" class="ex-container Ice-Cream.jpg" target="_blank">
+                <img src="images/exploratory/Ice-Cream.jpg" height="200" class="exploratory-photo youtube">
+                <h2 class="img-name">Ice Cream</h2>
+            </a>
+            <a href="https://www.youtube.com/user/TheFineBros" class="ex-container React.jpg" target="_blank">
+                <img src="images/exploratory/React.jpg" height="200" class="exploratory-photo youtube">
+                <h2 class="img-name">React Videos</h2>
+            </a>
+            <a href="https://www.youtube.com/results?search_query=73+questions vogue-73-questions.jpg" class="ex-container vogue-73-questions.jpg" target="_blank">
+                <img src="images/exploratory/vogue-73-questions.jpg" height="200" class="exploratory-photo youtube">
+                <h2 class="img-name">73 Questions</h2>
+            </a>
+            <a href="https://www.zillow.com/homes/los-angelos_rb/" class="ex-container Average-LA.jpg" target="_blank">
+                <img src="images/exploratory/Average-LA.jpg" height="200" class="exploratory-photo youtube">
+                <h2 class="img-name">Zillow - Los Angeles</h2>
+            </a>
+            <a href="https://www.zillow.com/homes/seattle_rb/" class="ex-container Average-Seattle.jpg" target="_blank">
+                <img src="images/exploratory/Average-Seattle.jpg" height="200" class="exploratory-photo youtube">
+                <h2 class="img-name">Zillow - Seattle</h2>
+            </a>
+            <a href="https://www.instagram.com/explore/tags/tajmahal/" class="ex-container Taj-Mahal.jpg" target="_blank">
+                <img src="images/exploratory/Taj-Mahal.jpg" height="200" class="exploratory-photo youtube">
+                <h2 class="img-name">Taj Mahal</h2>
+            </a>
+            <a href="https://www.instagram.com/explore/tags/pisa/" class="ex-container Pisa.jpg" target="_blank">
+                <img src="images/exploratory/Pisa.jpg" height="200" class="exploratory-photo youtube">
+                <h2 class="img-name">Leaning Tower of Pisa</h2>
+            </a> 
+          </div>
 
             <!--next_page_button-->
             <p class="mod-singular-pager"><a href="" class="mod-singular-prev js-singular-prev"></a></p>
             <!--next_page_button-->
-        </div>
         <script>
             var $grid = $('.exploratory').isotope({
                 // main isotope options
                 itemSelector: '.ex-container',
                 // set layoutMode
-                layoutMode: 'masonry',
-                masonry: {
-                    columnWidth: 45,
+                layoutMode: 'packery',
+                packery: {
                     gutter:10
                 }
             })
@@ -558,6 +572,45 @@ $(function() {
                 $(this).find(".img-name").animate({opacity: 0},'fast');
             });
         </script>
+       <!--javascript d3 graphics-->
+
+        <script>            
+          function drawChart(filename, height){
+            var barChart = d3.select("a[class$='"+filename+"']")
+                            .append("svg")
+                            .attr("class","ex-bar")
+                            .attr("width", 25)
+                            .attr("height", height);
+            
+            d3.json("data/exploratory.json", function(error,data){
+              if (error) throw error;
+              var listLength = data[filename].length;
+              barChart.selectAll("rect")
+                      .data(data[filename])
+                      .enter()
+                      .append("rect")
+                      .attr("height",function(d,i){return height/listLength})
+                      .attr("width","25")
+                      .attr("y",function(d,i){return i*height/listLength})
+                      .attr("fill", function(d,i){return d})
+                      .attr("x","25")
+                      .transition("1000")
+                      .attr("x","0")
+                });
+          }
+
+            $(".ex-container").mouseover(function(){
+              var filename = $(this).find("img").attr("src").slice(19);
+              drawChart(filename, this.clientHeight);
+            }).mouseout(function(){
+              $(this).find(".ex-bar")
+                    .css("z-index","-1")
+                    .animate({left:0},'fast', function(){
+                      $(this).remove()
+              }); 
+            });
+            </script>
+      </div>
     </section>
 
 </div>
