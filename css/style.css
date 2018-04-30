@@ -33,7 +33,7 @@ time, mark, audio, video {
 }
 
 h1{
-  color: #ea8080;
+  color: rgba(255, 255, 255, 0.92);
   font-weight: bold;
 }
 
@@ -98,7 +98,7 @@ body {
 }
 a, em{
   font-weight: bold;
-  color:#ea8080;
+  color:#f04545;
 }
 
 #sec01 a {
@@ -209,8 +209,8 @@ a, em{
   position:relative;
 }
 .mod-singular-pager a:before {
-  border-top: 5px solid #6c6c6c;
-  border-left: 5px solid #6c6c6c;
+  border-top: 5px solid #f04545;
+  border-left: 5px solid #f04545;
   content: "";
   display: inline;
   height: 14px;
@@ -259,7 +259,7 @@ a, em{
 .mod-nav-item a:hover,
 .mod-nav-item a:focus,
 .mod-nav-item.js-singular-active a {
-    background: #ea8080;
+    background: #f04545;
 }
 /**********/
 /* Custom */
@@ -290,7 +290,7 @@ a, em{
 }
 #salavon p a:hover {
   text-decoration: none;
-  color: #6c6c6c;
+  color: #f04545;
 }
 .mod-singular-subttl {
   font-size: 200%;
@@ -356,7 +356,7 @@ div .salavon-images{
     width: 20px;
     height: 20px;
     border-radius: 50%; 
-    background: #ea8080;
+    background: #f04545;
     cursor: pointer;
 }
 
@@ -366,7 +366,7 @@ div .salavon-images{
     width: 20px;
     height: 20px;
     border-radius: 50%; 
-    background: #ea8080;
+    background: #f04545;
     cursor: pointer;
 }
 
@@ -376,7 +376,7 @@ div .salavon-images{
   width: 20px;
   height: 20px;
   border-radius: 50%; 
-  background: #ea8080;
+  background: #f04545;
   cursor: pointer;
 }
 
@@ -425,6 +425,31 @@ div .salavon-images{
 .converge-txt{
   opacity: 0;
 }
+.feature-txt{
+  position: absolute;
+  opacity: 0;
+  left: 370px;
+  width:60%;
+  top: 50%;
+  text-align: left;  
+}
+.feature-img{
+  position: absolute;
+  opacity: 0;
+  left: 370px;
+  width:60%;
+  top: 70%;
+
+}
+.feature-img{
+  position: absolute;
+  opacity: 0;
+  left: 370px;
+  width:60%;
+  top: 70%;
+
+}
+
 
 /**********   page05  **********/
 /*svg*/
