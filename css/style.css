@@ -339,7 +339,7 @@ div .salavon-images{
 
 .slider-width {
     display: inline;
-    -webkit-appearance: none;
+/*    -webkit-appearance: none;*/
     width: 38%;
     height: 5px;
     border-radius: 5px;   
@@ -351,7 +351,7 @@ div .salavon-images{
 }
 
 .slider-width::-webkit-slider-thumb {
-    -webkit-appearance: none;
+/*    -webkit-appearance: none;*/
     appearance: none;
     width: 20px;
     height: 20px;
@@ -361,7 +361,7 @@ div .salavon-images{
 }
 
 .slider-width::-moz-range-thumb {
-    -webkit-appearance: none;
+/*    -webkit-appearance: none;*/
     appearance: none;
     width: 20px;
     height: 20px;
@@ -371,6 +371,49 @@ div .salavon-images{
 }
 
 .slider-width::-ms-thumb {
+/*  -webkit-appearance: none;*/
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  border-radius: 50%; 
+  background: #f04545;
+  cursor: pointer;
+}
+
+.slider-width2 {
+    display: inline;
+    -webkit-appearance: none;
+    width: 38%;
+    height: 5px;
+    border-radius: 5px;   
+    background: rgba(0,0,0,0.2);
+    opacity: 1;
+    -webkit-transition: .2s;
+    transition: opacity .2s;
+    margin: 5px auto;
+}
+
+.slider-width2::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%; 
+    background: #f04545;
+    cursor: pointer;
+}
+
+.slider-width2::-moz-range-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    border-radius: 50%; 
+    background: #f04545;
+    cursor: pointer;
+}
+
+.slider-width2::-ms-thumb {
   -webkit-appearance: none;
   appearance: none;
   width: 20px;
@@ -379,6 +422,8 @@ div .salavon-images{
   background: #f04545;
   cursor: pointer;
 }
+
+
 
 .face-number{
   margin: 0 auto;
@@ -424,6 +469,7 @@ div .salavon-images{
 
 .converge-txt{
   opacity: 0;
+    text-align: left;
 }
 .feature-txt{
   position: absolute;
@@ -439,15 +485,6 @@ div .salavon-images{
   left: 370px;
   width:60%;
   top: 70%;
-
-}
-.feature-img{
-  position: absolute;
-  opacity: 0;
-  left: 370px;
-  width:60%;
-  top: 70%;
-
 }
 
 
