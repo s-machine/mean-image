@@ -35,264 +35,299 @@ $(function() {
 
 <body>
 <div class="mod-page">
-<div class="mod-singular js-singular">
+    <div class="mod-singular js-singular">
 
-    <!--page_1 Intro-->
-    <div id="sec01" class="mod-singular-section">
-        <div class="mod-singular-section-in">
-            <div class="transbox">
-                <h1 class="mod-singular-ttl">Mean Images</h1>
-                <h2 class="mod-singular-subttl">an exploration of culture through pixels</h2>
-                <p id="authors" class="mod-singular-txt"><a href="/">Xingxin Chen</a>, <a href="http://sienaduplan.com">Siena Duplan</a>, <a href="https://godsamit.github.io/Samson-Liu-Website/">Samson Liu</a></p>
-            </div>
-            <!--next_page_button-->
-            <p class="mod-singular-pager"><a href="" class="mod-singular-next js-singular-next"></a></p>
-            <!--next_page_button-->
-            <div id="salavon">
-                <p class="circled"><a href="http://salavon.com/work/EveryPlayboyCenterfoldDecades/" target="_blank">?</a></p>
+        <!--page_1 Intro-->
+        <div id="sec01" class="mod-singular-section">
+            <div class="mod-singular-section-in">
+                <div class="transbox">
+                    <h1 class="mod-singular-ttl">Mean Images</h1>
+                    <h2 class="mod-singular-subttl">an exploration of culture through pixels</h2>
+                    <p id="authors" class="mod-singular-txt"><a href="/">Xingxin Chen</a>, <a href="http://sienaduplan.com">Siena Duplan</a>, <a href="https://godsamit.github.io/Samson-Liu-Website/">Samson Liu</a></p>
+                </div>
+                <!--next_page_button-->
+                <p class="mod-singular-pager"><a href="" class="mod-singular-next js-singular-next"></a></p>
+                <!--next_page_button-->
+                <div id="salavon">
+                    <p class="circled"><a href="http://salavon.com/work/EveryPlayboyCenterfoldDecades/" target="_blank">?</a></p>
+                </div>
             </div>
         </div>
-    </div>
 
-    <!--page_2 Salavon-->
-    <section id="sec02" class="mod-singular-section">
-        <div class="mod-singular-section-in">
-            <h2 class="mod-singular-hdng">What is a "mean" image?</h2>
-            <p class="mod-singular-txt-2">
-                Images like the ones below are the result of mathematically <em>averaging</em> several photographs. Digital averaging of pixels is a simple process where each pixel is treated as a numeric point with an RGB value. 
-            </p>
-            <p class="mod-singular-txt-2">
-                This project is inspired by the artwork of contemporary artist <a href="http://www.salavon.com" target="_blank">Jason Salavon</a> whose series <a href="http://salavon.com/work/SpecialMoments/" target ="_blank">"100 Special Moments”</a> is shown below. Salavon is known for using computer software to reconfigure existing media into fine art. His series on averaged images straddles the boundary between art and data visualization, often revealing never-before-seen patterns in the pixels captured in photographs.
-            </p>
-            <div class="salavon-grid">
-                <a href="http://salavon.com/work/SpecialMoments/" target="_blank">
-                    <img src="images/salavon/100moments-1.jpg" height="200" class="salavon-photo" id="S-1"></a>
-                <a href="http://salavon.com/work/SpecialMoments/" target="_blank">
-                    <img src="images/salavon/100moments-2.jpg" height="200" class="salavon-photo" id="S-2"></a>
-                <a href="http://salavon.com/work/SpecialMoments/" target="_blank">
-                    <img src="images/salavon/100moments-3.jpg" height="200" class="salavon-photo" id="S-3"></a>
-                <a href="http://salavon.com/work/SpecialMoments/" target="_blank">
-                    <img src="images/salavon/100moments-4.jpg" height="200" class="salavon-photo" id="S-4"></a>
-            </div>
-            <!--next_page_button-->
-            <p class="mod-singular-pager"><a href="" class="mod-singular-next js-singular-next"></a></p>
-            <!--next_page_button-->
-        </div>
-        <!--javascript-image-layout-->
-        <script>
-            var $grid = $('.salavon-grid').isotope({
-                // main isotope options
-                itemSelector: '.salavon-photo',
-                // set layoutMode
-                layoutMode: 'fitRows',
-                // options for cellsByRow layout mode
-                fitRows: {
-                    gutter: 5,
-                    rowHeight: 150
-                },
-                // options for masonry layout mode
-            })
-        </script>
-        <!--javascript-d3-graphics-->
-        <script>
-
-            function getSum(total, num){
-                return total + num;
-            }
-            $('.salavon-photo').mouseover(function(){
-                var id = Number($(this).attr("id")[2]); 
-                //not making it responsive... magic numbers
-                widthArray = [151,159,131,250]
-                var img_width = widthArray[id-1];
-                if (id == 1) startX = 0;
-                else{
-                    var startX = widthArray.slice(0,id-1).reduce(getSum) + 5*(id-1);
-                }
-
-                var barChart = d3.select(".salavon-grid")
-                .append("svg")
-                .attr("class","salavon-bar")
-                .attr("width", 1000)
-                .attr("height", 75);
-
-                d3.json("data/salavon.json", function(error,data){
-                    if (error) throw error;
-                    let listLength = data[id-1].colorList.length;
-                    barChart.selectAll("rect")
-                        .data(data[id-1].colorList)
-                        .enter()
-                        .append("rect")
-                        .attr("height","0")
-                        .attr("width",function(d,i){return img_width/listLength})
-                        .attr("x",function(d,i){return startX+i*(img_width/listLength)})
-                        .attr("y","0")
-                        .attr("fill", function(d,i){return d})
-                        .transition("1000")
-                        .attr("height",function(d,i){return hexToValue(d)*75});
-                    $("svg").translate
-                })
-            }).mouseout(function(){
-                d3.select("#sec02").selectAll("rect")
-                    .transition("1000")
-                    .attr("height","0")
-                    .remove();
-
-
-            });
-
-        </script>
-    </section>
-
-    <!--page_3 Faces-->
-    <section id="sec03" class="mod-singular-section">
-        <div class="mod-singular-section-in">
-            <h2 class="mod-singular-hdng">An "average" face?</h2>
-            <div class="container">
-                <img src="images/cropped_yale.gif" width="700">
-                <p class="mod-singular-txt-3 bottom-right">
-                    The <a href="http://academictorrents.com/details/aad8bf8e6ee5d8a3bf46c7ab5adfacdd8ad36247" target="_blank">Cropped Yale Dataset</a> is a widely-used dataset for machine learning and image processing research. The dataset contains 16128 images of 28 human subjects in 9 poses and 64 illumination conditions. It’s popularity is due in part to its high-quality alignment of facial features which allows the "mean" image of thousands of images to resemble a single face. <br> Interestingly, the more images that are used to compute the average face, the slower the rate of change in the mean image. That is, the average image tends to <em>converge fairly quickly</em> (between 20 and 50 images). See for yourself below! 
+        <!--page_2 Salavon-->
+        <section id="sec02" class="mod-singular-section">
+            <div class="mod-singular-section-in">
+                <h2 class="mod-singular-hdng">What is a "mean" image?</h2>
+                <p class="mod-singular-txt-2">
+                    Images like the ones below are the result of mathematically <em>averaging</em> several photographs. Digital averaging of pixels is a simple process where each pixel is treated as a numeric point with an RGB value. 
                 </p>
+                <p class="mod-singular-txt-2">
+                  This project is inspired by the artwork of contemporary artist <a href="http://www.salavon.com" target="_blank">Jason Salavon</a> whose series <a href="http://salavon.com/work/SpecialMoments/" target ="_blank">"100 Special Moments”</a> is shown below. Salavon is known for using computer software to reconfigure existing media into fine art. His series on averaged images straddles the boundary between art and data visualization, often revealing <em>intuitive, and never-before-seen patterns</em> in the pixels captured in photographs.
+                </p>
+              <p><em>Put your mouse over the images to find out what the topics are!</em></p>
+                <div class="salavon-grid">
+                    <a href="http://salavon.com/work/SpecialMoments/" target="_blank">
+                        <img src="images/salavon/100moments-1.jpg" height="200" class="salavon-photo" id="S-1"></a>
+                    <a href="http://salavon.com/work/SpecialMoments/" target="_blank">
+                        <img src="images/salavon/100moments-2.jpg" height="200" class="salavon-photo" id="S-2"></a>
+                    <a href="http://salavon.com/work/SpecialMoments/" target="_blank">
+                        <img src="images/salavon/100moments-3.jpg" height="200" class="salavon-photo" id="S-3"></a>
+                    <a href="http://salavon.com/work/SpecialMoments/" target="_blank">
+                        <img src="images/salavon/100moments-4.jpg" height="200" class="salavon-photo" id="S-4"></a>
+                </div>
+                <!--next_page_button-->
+                <p class="mod-singular-pager"><a href="" class="mod-singular-next js-singular-next"></a></p>
+                <!--next_page_button-->
             </div>
-            <!--next_page_button-->
-            <p class="mod-singular-pager"><a href="" class="mod-singular-next js-singular-next"></a></p>
-            <!--next_page_button-->
-        </div>
-    </section>
-
-    <!--page_4 Convergence-->
-    <section id="sec04" class="mod-singular-section">
-        <div class="mod-singular-section-in">
-            <h2 class="mod-singular-hdng">Can you find the point of convergence?</h2>
-            <div class="grid-container">
-                <!--slider image-->
-                <div class="grid-item">
-                    <img id="faces" width="300">
-                </div>
-                <!--final image-->
-                <div class="grid-item">
-                    <img src="images/mean_faces/mean_faces_2414.png" width="300">
-                </div>
-                <div class="gird-item">
-                    <p class="grid-item converge-txt">The mean face composed of 100 images already begins to look similar to the average of all 2,414 faces. This means that if we took the "average" of every human's face on Earth, we wouldn't expect the face to look much different from the image right. </p>
-                </div>
-                <!--slider+caption-->
-                <div class="grid-item">
-                    <input class="slider-width2" id="valR" type="range" min="0" max="5" value="0" step="1" oninput="showVal(this.value)" onchange="showVal(this.value)" />
-                    <span id="range">0</span>
-                    <div class="grid-item face-number">
-                        <span id="realval">10</span>
-                        <span>faces</span>
-                    </div>
-                </div>  
-                <div class="grid-item face-number fn2">
-                    2414 faces
-                </div>
-
-            </div>
+            <!--javascript-image-layout-->
             <script>
-                var val = $("#valR").val();
-                $("#range").html=val;
-                var numImages = 10;
-                $("#faces").attr("src", "images/mean_faces/mean_faces_" + numImages + ".png");
-                function showVal(newVal){
-                    if (newVal >= 2){ 
-                        $(".converge-txt").animate({opacity: '1'},"slow");
-                    }
-                    numImagesArr=["10", "50", "100", "500", "1000", "2414"]
-                    numImages=numImagesArr[newVal];
-                    $("#range").html(newVal);
-                    $("#realval").html(numImagesArr[newVal]);
-                    $("#faces").attr("src", "images/mean_faces/mean_faces_" + numImages + ".png");
+                var $grid = $('.salavon-grid').isotope({
+                    // main isotope options
+                    itemSelector: '.salavon-photo',
+                    // set layoutMode
+                    layoutMode: 'fitRows',
+                    // options for cellsByRow layout mode
+                    fitRows: {
+                        gutter: 5,
+                        rowHeight: 150
+                    },
+                    // options for masonry layout mode
+                })
+            </script>
+            <!--javascript-d3-graphics-->
+            <script>
+                function getSum(total, num){
+                    return total + num;
                 }
+                $('.salavon-photo').mouseover(function(){
+                    var id = Number($(this).attr("id")[2]); 
+                    //not making it responsive... magic numbers
+                    widthArray = [151,159,131,250]
+                    var img_width = widthArray[id-1];
+                    if (id == 1) startX = 0;
+                    else{
+                        var startX = widthArray.slice(0,id-1).reduce(getSum) + 5*(id-1);
+                    }
+
+                    var barChart = d3.select(".salavon-grid")
+                    .append("svg")
+                    .attr("class","salavon-bar")
+                    .attr("width", 1000)
+                    .attr("height", 75);
+
+                    d3.json("data/salavon.json", function(error,data){
+                        if (error) throw error;
+                        let listLength = data[id-1].colorList.length;
+                        barChart.selectAll("rect")
+                            .data(data[id-1].colorList)
+                            .enter()
+                            .append("rect")
+                            .attr("height","0")
+                            .attr("width",function(d,i){return img_width/listLength})
+                            .attr("x",function(d,i){return startX+i*(img_width/listLength)})
+                            .attr("y","0")
+                            .attr("fill", function(d,i){return d})
+                            .transition("1000")
+                            .attr("height",function(d,i){return hexToValue(d)*75});
+                        $("svg").translate
+                    })
+                }).mouseout(function(){
+                    d3.select("#sec02").selectAll("rect")
+                        .transition("1000")
+                        .attr("height","0")
+                        .remove();
+                });
 
             </script>
-            <!--next_page_button-->
-            <p class="mod-singular-pager"><a href="" class="mod-singular-next js-singular-next"></a></p>
-            <!--next_page_button-->
-        </div>
-    </section>
+        </section>
 
-    <!--page_5 History-->
-    <section id="sec05" class="mod-singular-section">
-        <div class="mod-singular-section-in">
-            <h2 class="mod-singular-hdng">Going back in <i>Time</i> with mean images</h2>
-            <div class="time-container">
-                <!--slider image-->
-                <div class="time-div">
-                    <img id="time-magazine" height="400">
-                    <p id="time-cap">1923</p>
+        <!--page_3 Faces-->
+        <section id="sec03" class="mod-singular-section">
+            <div class="mod-singular-section-in">
+                <h2 class="mod-singular-hdng">An "average" face?</h2>
+                <div class="container">
+                    <img src="images/cropped_yale.gif" width="75%">
+                    <p class="mod-singular-txt-3 bottom-right">
+                        The <a href="http://academictorrents.com/details/aad8bf8e6ee5d8a3bf46c7ab5adfacdd8ad36247" target="_blank">Cropped Yale Dataset</a> is a widely-used dataset for machine learning and image processing research. The dataset contains 16128 images of 28 human subjects in 9 poses and 64 illumination conditions. It’s popularity is due in part to its high-quality alignment of facial features which allows the "mean" image of thousands of images to resemble a single face. <br> Interestingly, the more images that are used to compute the average face, the slower the rate of change in the mean image. That is, the average image tends to <em>converge fairly quickly</em> (between 20 and 50 images). See for yourself below! 
+                    </p>
+                </div>
+                <!--next_page_button-->
+                <p class="mod-singular-pager"><a href="" class="mod-singular-next js-singular-next"></a></p>
+                <!--next_page_button-->
+            </div>
+        </section>
+
+        <!--page_4 Convergence-->
+        <section id="sec04" class="mod-singular-section">
+            <div class="mod-singular-section-in">
+                <h2 class="mod-singular-hdng">Can you find the point of convergence?</h2>
+                <div class="grid-container">
+                  <!--final image-->
+                    <div class="grid-item">
+                        <img src="images/mean_faces/mean_faces_2414.png" width="85%">
+                    </div>
+                    <!--slider image-->
+                    <div class="grid-item">
+                        <img id="faces" width="85%">
+                    </div>
+
+                    <div class="gird-item">
+                        <p class="grid-item converge-txt speech-bubble">The mean face composed of 100 images already begins to look similar to the average of all 2,414 faces. This means that if we took the "average" of every human's face on Earth, we wouldn't expect the face to look much different from the image right. </p>
+                    </div>
                     <!--slider+caption-->
-                    <input list = "steplist" step="1" class="slider-width time-slider" id="year" type="range" min="1923" max="2018" value="0" oninput="changeAll(this.value)" />
-                    <datalist id="steplist">
-                        <option>1924</option>
-                        <option>1927</option>
-                        <option>1928</option>
-                        <option>1966</option>
-                        <option>1974</option>
-                        <option>1993</option>
-                        <option>2017</option>
-                        <option>2018</option>
-                    </datalist>
-                    <div id="slider-range-max"></div>
-                    <span class="speech-bubble"></span>
-                    <p class="time-intro">The mean image on the right is generated from the all the <a href="http://time.com/" target ="_blank"><i>Time</i></a> Magazines in a year, since its inception until 2018. See if you can identify any historical events/figures from the mean images. Can you tell the gender of the prominent figures featured on covers throughout the years? Why might some years be darker/lighter than other years?</p>
-                    <br>
+                    <span class="grid-item face-number" id ="fn2">
+                        2414 faces
+                    </span>
+                    <div class="grid-item">
+                        <input class="slider-width2" id="valR" type="range" min="0" max="5" value="0" step="1" oninput="showVal(this.value)" onchange="showVal(this.value)" />
+                        <span id="range">0</span>
+                        <div class="grid-item face-number">
+                          <span id="realval">10 faces</span>
+                        </div>
+                    </div>  
+                </div>
+                <script>
+                    var val = $("#valR").val();
+                    $("#range").html=val;
+                    var numImages = 10;
+                    $("#faces").attr("src", "images/mean_faces/mean_faces_" + numImages + ".png");
+                    function showVal(newVal){
+                        if (newVal >= 2){ 
+                            $(".converge-txt").animate({opacity: '1'},"slow");
+                        }
+                        numImagesArr=["10", "50", "100", "500", "1000", "2414"]
+                        numImages=numImagesArr[newVal];
+                        $("#range").html(newVal);
+                        $("#realval").html(numImagesArr[newVal]+" faces");
+                        $("#faces").attr("src", "images/mean_faces/mean_faces_" + numImages + ".png");
+                    }
+
+                </script>
+                <!--next_page_button-->
+                <p class="mod-singular-pager"><a href="" class="mod-singular-next js-singular-next"></a></p>
+                <!--next_page_button-->
+            </div>
+        </section>
+
+        <!--page_5 History-->
+        <section id="sec05" class="mod-singular-section">
+          <div class="mod-singular-section-in">
+            <h2 class="mod-singular-hdng">Going back in <i>Time</i> with mean images</h2>
+              <div class="time-container">
+              <!--slider image-->
+                <div class="time-div">
+                  <div class="time-img">
+                    <img id="time-magazine" height="100%">
+                  </div>
+                  <p id="time-cap">1923</p>
+                  <!--slider+caption-->
+                  <div id="slider-range-max">
+                    <input step="1" class="slider-width time-slider" id="year" type="range" min="1923" max="2018" value="0" oninput="changeAll(this.value)" onchange="changeAll(this.value)" />
+                    <span id="slider-thumb" class="thumb-tag">1923</span>
+                  </div>
+                  <p class="time-intro">The mean image on the right is generated from the all the <a href="http://time.com/" target ="_blank"><i>Time</i></a> Magazines in a year, since its inception until 2018. See if you can identify any historical events/figures from the mean images. Can you tell the gender of the prominent figures featured on covers throughout the years? Why might some years be darker/lighter than other years?</p>
+                  <br>
+                  <div class="features">
                     <p class="feature-txt"></p>
                     <p class="feature-img"></p>
+                  </div>
                 </div>  
-            </div>
+              </div>
+                <!--ticks on slider-->
+              <script>
+                var width = $("#year")[0].clientWidth;
+                var years = 95;
+                var ticksValAl   = [1924,1927,1928,1952,1966,1974,1976,1993,2017,2018];
+                var ticksVal     = [1924,1927,1966,1993,2017,2018];
+                var ticksPosAll  = [2,   5,   6,   29,  44,  52,  54,  71,  95,  96];
+                var ticksPos  = [2,   5,   44,  71,  95,  96];
+                var rectEntry    = [2, 5];
+                var ticks = d3.select("#slider-range-max")
+                              .append("svg")
+                              .attr("class","stacked-bar")
+                              .attr("width", width+15)
+                              .attr("height", 40);
+                function draw(){
+                  ticks.selectAll("circle")
+                        .data(ticksVal)
+                        .enter()
+                        .append("circle")
+                        .attr("cx", function(d,i){return 10+(ticksPos[i]*((width-20)/years));})
+                        .attr("cy", "18")
+                        .attr("r", "10")
+                        .attr("fill", "#f0454540")
+                        .attr("class", "ticks")
+                  ticks.selectAll("rect")
+                        .data(rectEntry)
+                        .enter()
+                        .append("rect")
+                        .attr("rx", "10")
+                        .attr("ry", "10")
+                        .attr("x", function(d,i){return (ticksPosAll[d]*((width-20)/years));})
+                        .attr("y", "8")
+                        .attr("width", function(d,i){return ((ticksPosAll[d+1]-ticksPosAll[d])*((width-20)/years)+20);})
+                        .attr("height", "20")
+                        .attr("fill", "#f0454540")
+                        .attr("class", "ticks")
+                        .append();
+                }
+                draw();
 
-            <!--change_cover+D3_bar_chart-->
-            <script>      
+              </script>
+
+              <!--change_cover+D3_bar_chart-->
+              <script>      
                 //change_cover
                 var year = $("#year").val();
                 var timeCover = "images/time/Time-" + year + ".jpg" ;
                 $("#time-magazine").attr("src", timeCover);
 
                 //D3_bar_chart
-                var barChart = d3.select(".time-container")
+                var barChart = d3.select(".time-img")
                 .insert("svg",":first-child")
                 .attr("class","stacked-bar")
                 .attr("width", 100)
                 .attr("height", 500)
 
+                var timeHeight = $("#time-magazine")[0].clientHeight;
+
                 //load bar-chart
                 d3.json("data/time.json",function(error, data){
-                    if (error) throw error;
-                    barChart.selectAll("rect")
+                  if (error) throw error;
+                  barChart.selectAll("rect")
                         .remove();
-
-                    barChart.selectAll("rect")
-                        .data(data[0].colorList)
-                        .enter()
-                        .append("rect")
-                        .attr("height","1.07")
-                        .attr("width", function(d,i){return hexToValue(d)*100})
-                        .attr("x",function(d,i){ return 100 - hexToValue(d)*100})
-                        .attr("y",function(d,i){ return i*1.07})
-                        .attr("fill", function(d,i){return d});
+                  var colorLength = data[0].colorList.length;
+                  barChart.selectAll("rect")
+                    .data(data[0].colorList)
+                    .enter()
+                    .append("rect")
+                    .attr("height",function(d,i){return timeHeight/colorLength})
+                    .attr("width", function(d,i){return hexToValue(d)*100})
+                    .attr("x",function(d,i){ return 100 - hexToValue(d)*100})
+                    .attr("y",function(d,i){ return i*(timeHeight/colorLength)})
+                    .attr("fill", function(d,i){return d});
                 });
 
                 function changeTimeCover(year){
-                    var timeCover = "images/time/Time-" + year + ".jpg" ;
-                    $("#time-magazine").attr("src", timeCover);
-                    $("#time-cap").html(year);
+                  var timeCover = "images/time/Time-" + year + ".jpg" ;
+                  $("#time-magazine").attr("src", timeCover);
+                  $("#time-cap").html(year);
                 }
 
                 function changeBar(year){
-                    var index = year - 1923;
-
-                    d3.json("data/time.json",function(error, data){
-                        if (error) throw error;
-                        barChart.selectAll("rect")
+                  var index = year - 1923;
+                  var timeHeight = $("#time-magazine")[0].clientHeight;
+                  d3.json("data/time.json",function(error, data){
+                    if (error) throw error;
+                    var colorLength = data[0].colorList.length;
+                    barChart.selectAll("rect")
                             .remove();
-
-                        barChart.selectAll("rect")
+                    barChart.selectAll("rect")
                             .data(data[index].colorList)
                             .enter()
                             .append("rect")
                             .attr("height","1.07")
-                            .attr("y",function(d,i){ return i*1.07})
+                            .attr("y",function(d,i){ return i*(timeHeight/colorLength)})
                             .attr("fill", function(d,i){return d})
                             .attr("x","100")
                             .attr("width","0")
@@ -300,10 +335,76 @@ $(function() {
                             .attr("x","45")
                             .attr("width", function(d,i){return hexToValue(d)*100})
                             .attr("x",function(d,i){return 100 - hexToValue(d)*100});
-                    });
+
+                  var width = $("#year")[0].clientWidth;
+                  var position = 340+(width-20)/96*index;
+                  $("#slider-thumb").html(year);
+                  $("#slider-thumb").css("left", position);
+                  });
                 }
 
                 function changeAll(year){
+                  changeTimeCover(year);
+                  changeBar(year);
+                  if(year==1966){
+                    $(".feature-img").empty();
+                    $(".feature-txt").html("I spy a suit and tie in the bottom half of the image. This year featured a record-breaking lowest number of women on the cover: 3.")
+                                      .addClass("speech-bubble");
+                    $(".feature-img").append('<img id="men" src="./images/men.png" />');
+                    $(".features").animate({opacity: '1'},"fast");
+                  }
+                  else if(year==1993){
+                    $(".feature-img").empty();
+                    $(".feature-txt").html("1993 covers featured text-heavy covers with bold black, white, and yellow titles spread across the covers.")
+                                      .addClass("speech-bubble");
+                    $(".feature-img").append('<img id="1993" src="./images/time_1993.png"/>')
+                    $(".features").animate({opacity: '1'},"fast");
+                  }
+                  else if(year==1924) {  
+                    $(".feature-img").empty();
+                    $(".feature-txt").animate({opacity: '1'},"fast")
+                                        .html("At its inception, the magazine didn't have its now-famous signature red border.")
+                                        .addClass("speech-bubble");
+                    $(".features").animate({opacity: '1'},"fast");
+
+                  }
+                  else if(year==1927) {
+                    $(".feature-img").empty();
+                    $(".feature-txt").html("Four years after the first magazine, the red border is added.")
+                                        .addClass("speech-bubble");
+                    $(".features").animate({opacity: '1'},"fast");
+
+                  }
+                  else if(year==2017){
+                    $(".feature-img").empty();
+                    $(".feature-txt").html("The year of...")
+                                      .addClass("speech-bubble");
+                    $(".feature-img").append('<img id="trump17" src="./images/trmp_2017.png"" style="width:350px" />');
+                    $(".features").animate({opacity: '1'},"fast");
+                  }
+                  else if(year==2018){
+                    $(".feature-img").empty();
+                    $(".feature-txt").html("Welcome to today. Can you spot this cover? ;)")
+                                      .addClass("speech-bubble");
+                    $(".feature-img").append('<img id="tr*mp" src="./images/trump.jpg"/>');
+                    $(".features").animate({opacity: '1'},"fast");
+                  }
+                  else if(year >= 1928 && year <= 1952) {
+                    $(".feature-img").empty();
+                    $(".feature-txt").html("During these years (1928 – 1952), a consistent theme appears: red border and a lot of white space around a headshot (usually of a man).")
+                                      .addClass("speech-bubble");
+                    $(".features").animate({opacity: '1'},"fast");
+                  }
+                  else if(year >= 1974 && year <= 1976) {
+                    $(".feature-img").empty();
+                    $(".feature-txt").html("Watch closely what happens between 1974 and 1976. There appears to be a shift in the prominence of a recognizable face in the data. In the modern history of Time magazine, fewer faces are featured and covers become less about individual people.")
+                                      .addClass("speech-bubble");
+                    $(".features").animate({opacity: '1'},"fast");
+                  }
+                  else{ 
+                    $(".feature-txt").removeClass("speech-bubble").empty();
+                    $(".feature-img").empty();
+                  }
                     changeTimeCover(year);
                     changeBar(year);
                     if(year==1966){
@@ -373,110 +474,126 @@ $(function() {
                         $(".feature-img2 img").remove();
                     }
                 }
-            </script>
+              </script>
 
-            <!--next_page_button-->
-            <p class="mod-singular-pager"><a href="" class="mod-singular-next js-singular-next"></a></p>
-            <!--next_page_button-->
-        </div>
-    </section>
+              <!--next_page_button-->
+              <p class="mod-singular-pager"><a href="" class="mod-singular-next js-singular-next"></a></p>
+              <!--next_page_button-->
+            </div>
+        </section>
 
-    <!--page_6 Comparison-->
-    <section id="sec06" class="mod-singular-section">
-        <div class="mod-singular-section-in">
-            <h2 class="mod-singular-hdng">Social norms and culture, through mean image </h2>
-
+        <!--page_6 Comparison-->
+        <section id="sec06" class="mod-singular-section">
+          <div class="mod-singular-section-in">
+            <h2 class="mod-singular-hdng">Comparison and revelation, through mean images </h2>
             <span id="filters" class="button-group">
-                <button class="button" data-filter="*">Explore All</button>
-                <button class="button" data-filter=".mvw">Men vs Women</button>
-                <button class="button" data-filter=".countries">Magazines in different countries</button>
+              <button class="button is-checked" data-filter="*">Explore All</button>
+              <button class="button" data-filter=".mvw">Men vs Women</button>
+              <button class="button" data-filter=".countries">Magazines in different countries</button>
             </span>
-            <div class="magazine-grid-container-5 comparison-container">            
-                <!--draggable covers a-->
-                <div class="magazine-grid-item-5">
+            <!--draggable covers a-->
+            <span class="magazine-grid-a magazines">
+              <span class="magazine  mvw">
+                <span id="draggable-a" class="ui-widget-content menshealth">
+                  <img src="images/mens_health1.jpg" width = "100">
+                </span>
+              </span>
+              <span class="magazine countries">
+                <span id="draggable-a" class="ui-widget-content usa">
+                  <img src="images/usa.jpg" width = "100">
+                </span>
+              </span>
+              <span class="magazine mvw">
+                <span id="draggable-a" class="ui-widget-content gq">
+                  <img src="images/gq.jpg" width = "100">
+                </span>
+              </span>
+              <span class="magazine countries">
+                <span id="draggable-a" class="ui-widget-content italia">
+                  <img src="images/italia.jpg" width = "100">
+                </span>
+              </span>
+            </span>
 
-                    <div class="magazine-grid-container-a magazines">
-                        <div class="magazine-grid-item  mvw">
-                            <div id="draggable-a" class="ui-widget-content menshealth"></div>
-                        </div>
+            <!--drop off area-->
+            <span class="comparison-container">           
+              <span>
+                <span id="droppable-a" class="ui-widget-header" style="display: inline-block">
+                  <p>Drag a magazine here</p>
+                </span>
+              </span>
+              <span>
+                <span id="droppable-b" class="ui-widget-header" style="display: inline-block;">
+                  <p>Drag a magazine here</p>
+                </span>
+              </span>
+            </span>
 
-                        <div class="magazine-grid-item countries">
-                            <div id="draggable-a" class="ui-widget-content usa"></div>
-                        </div>
-
-                        <div class="magazine-grid-item countries">
-                            <div id="draggable-a" class="ui-widget-content japan"></div>
-                        </div>
-
-                        <div class="magazine-grid-item  countries">
-                            <div id="draggable-a" class="ui-widget-content italia"></div>
-                        </div>
-                    </div>
-                </div>
-
-                <!--drop off area-->
-                <div class="magazine-grid-item-5">
-                    <div id="droppable-a" class="ui-widget-header" style="display: inline-block">
-                        <p>Drag a magazine here</p>
-                    </div>
-                </div>
-                <div class="magazine-grid-item-5">
-                    <div id="droppable-b" class="ui-widget-header" style="display: inline-block;">
-                        <p>Drag a magazine here</p>
-                    </div>
-                </div>
-
-                <!--draggable covers b-->
-                <div class="magazine-grid-item-5">
-                    <div class="magazine-grid-container-b magazines">
-
-                        <div class="magazine-grid-item mvw">
-                            <div id="draggable-b" class="ui-widget-content womenshealth"></div>
-                        </div>
-
-                        <div class="magazine-grid-item mvw">
-                            <div id="draggable-b" class="ui-widget-content placeholder"></div>
-                        </div>
-
-                        <div class="magazine-grid-item mvw">
-                            <div id="draggable-b" class="ui-widget-content placeholder"></div>
-                        </div>  
-
-                        <div class="magazine-grid-item countries">
-                            <div id="draggable-b" class="ui-widget-content placeholder"></div>
-                        </div>  
-                    </div>
-                </div>
-            </div> 
+            <!--draggable covers b-->  
+            <span class="magazine-grid-b magazines">
+              <span class="magazine mvw">
+                <span id="draggable-b" class="ui-widget-content womenshealth">
+                  <img src="images/womens_health1.jpg" width = "100">
+                </span>
+              </span>
+              <span class="magazine countries">
+                <span id="draggable-b" class="ui-widget-content japan">
+                  <img src="images/japan.jpg" width = "100">
+                </span>
+              </span>
+              <span class="magazine countries">
+                <span id="draggable-b" class="ui-widget-content placeholder">
+                  <img src="images/usa.jpg" width = "100">
+                </span>
+              </span>  
+              <span class="magazine mvw">
+                <span id="draggable-b" class="ui-widget-content glamour">
+                  <img src="images/glamour.jpg" width = "100">
+                </span>
+              </span>  
+            </span>
             <!--filter-->
             <script>
-                // init Isotope
-                var $gallery = $('.magazines').isotope({
-                    itemSelector: '.magazine-grid-item',
-                    llayoutMode: 'cellsByRow',
-                    cellsByRow: {
-                        columnWidth: 1100,
-                        rowHeight: 110
-                    }
+              // init Isotope
+              var $gallery = $('.magazines').isotope({
+                itemSelector: '.magazine',
+                layoutMode: 'vertical',
+                vertical: {
+                  horizontalAlignment: 0
+                  }
                 });
 
-                // bind filter button click
-                $('.button-group').on( 'click', 'button', function() {
-                    var filterValue = $( this ).attr('data-filter');
-                    $gallery.isotope({ filter: filterValue });
-                });
+              // bind filter button click
+              $('.button-group').on( 'click', 'button', function() {
+                var filterValue = $( this ).attr('data-filter');
+                $gallery.isotope({ filter: filterValue });
+              });
 
-                // change is-checked class on buttons
-                $('.buttons').each( function( i, buttonGroup ) {
-                    var $buttonGroup = $( buttonGroup );
-                    $buttonGroup.on( 'click', 'button', function() {
-                        $buttonGroup.find('.is-checked').removeClass('is-checked');
-                        $( this ).addClass('is-checked');
-                    });
+              // change is-checked class on buttons
+              $('.button-group').each( function( i, buttonGroup ) {
+                var $buttonGroup = $( buttonGroup );
+                $buttonGroup.on( 'click', 'button', function() {
+                $buttonGroup.find('.is-checked').removeClass('is-checked');
+                $(this).addClass('is-checked');
                 });
+              });
             </script>
             <!--drag and drop-->
             <script>
+              $( function() {
+                $("#draggable-a, #draggable-b").draggable({ revert: "valid" });
+
+                $("#droppable-a").droppable({
+                  accept: "#draggable-a",
+                  classes: {
+                    "ui-droppable-active": "ui-state-active-a",
+                    "ui-droppable-hover": "ui-state-hover-a"
+                  },
+                  drop: function(event,ui) {
+                    $(this).empty().append('<img src="images/mens_health_all.png" width="347px", height="450px">');
+
+                  }
+                });
                 $( function() {
                     $("#draggable-a, #draggable-b, #draggable-nonvalid-a, #draggable-nonvalid-b").draggable({ revert: "valid" });
 
@@ -551,82 +668,140 @@ $(function() {
                 <h2 class="img-name">Leaning Tower of Pisa</h2>
             </a> 
           </div>
+          <script>
+                $("#droppable-b" ).droppable({
+                  accept: "#draggable-b",
+                  classes: {
+                    "ui-droppable-active": "ui-state-active-b",
+                    "ui-droppable-hover": "ui-state-hover-b"
+                  },
+                  drop: function(event,ui){
+                    $(this).empty().append('<img src="images/small_womens.png" width="347px", height="450px">');
+                  }
+                  });
+                });
+          </script>
+          <!--next_page_button-->
+          <p class="mod-singular-pager"><a href="" class="mod-singular-next js-singular-next"></a></p>
+          <!--next_page_button-->
+          </div> 
+        </section>
 
-            <!--next_page_button-->
-            <p class="mod-singular-pager"><a href="" class="mod-singular-prev js-singular-prev"></a></p>
-            <!--next_page_button-->
-        <script>
-            var $grid = $('.exploratory').isotope({
+        <!--page_7 Exploratory-->  
+        <section id="sec07" class="mod-singular-section">
+          <div class="mod-singular-section-in">
+            <h2 class="mod-singular-hdng">Explore more mean images!</h2>
+              <h3>Put your mouse over the images to find out what the topics are.</h3>
+              <div class="exploratory">
+                <a href="http://www.laurainthekitchen.com/recipe-category.php?category=BEVERAGE" class="ex-container  Beverage.jpg" target="_blank">
+                  <img src="images/exploratory/Beverage.jpg" height="200" class="exploratory-photo food">
+                  <h2 class="img-name">Beverages</h2>
+                </a>
+                <a href="https://www.instagram.com/icecream/" class="ex-container Ice-Cream.jpg" target="_blank">
+                  <img src="images/exploratory/Ice-Cream.jpg" height="200" class="exploratory-photo youtube">
+                  <h2 class="img-name">Ice Cream</h2>
+                </a>
+                <a href="https://www.youtube.com/user/TheFineBros" class="ex-container React.jpg" target="_blank">
+                  <img src="images/exploratory/React.jpg" height="200" class="exploratory-photo youtube">
+                  <h2 class="img-name">React Videos</h2>
+                </a>
+                <a href="https://www.youtube.com/results?search_query=73+questions vogue-73-questions.jpg" class="ex-container vogue-73-questions.jpg" target="_blank">
+                  <img src="images/exploratory/vogue-73-questions.jpg" height="200" class="exploratory-photo youtube">
+                  <h2 class="img-name">73 Questions</h2>
+                </a>
+                <a href="https://www.zillow.com/homes/los-angelos_rb/" class="ex-container Average-LA.jpg" target="_blank">
+                  <img src="images/exploratory/Average-LA.jpg" height="200" class="exploratory-photo youtube">
+                  <h2 class="img-name">Zillow - Los Angeles</h2>
+                </a>
+                <a href="https://www.zillow.com/homes/seattle_rb/" class="ex-container Average-Seattle.jpg" target="_blank">
+                  <img src="images/exploratory/Average-Seattle.jpg" height="200" class="exploratory-photo youtube">
+                  <h2 class="img-name">Zillow - Seattle</h2>
+                </a>
+                <a href="https://www.instagram.com/explore/tags/tajmahal/" class="ex-container Taj-Mahal.jpg" target="_blank">
+                  <img src="images/exploratory/Taj-Mahal.jpg" height="200" class="exploratory-photo youtube">
+                  <h2 class="img-name">Taj Mahal</h2>
+                </a>
+                <a href="https://www.instagram.com/explore/tags/pisa/" class="ex-container Pisa.jpg" target="_blank">
+                  <img src="images/exploratory/Pisa.jpg" height="200" class="exploratory-photo youtube">
+                  <h2 class="img-name">Leaning Tower of Pisa</h2>
+                </a> 
+              </div>
+
+              <!--next_page_button-->
+              <p class="mod-singular-pager"><a href="" class="mod-singular-prev js-singular-prev"></a></p>
+              <!--next_page_button-->
+            <script>
+              var $grid = $('.exploratory').isotope({
                 // main isotope options
                 itemSelector: '.ex-container',
                 // set layoutMode
                 layoutMode: 'packery',
                 packery: {
-                    gutter:10
+                  gutter:10
                 }
-            })
-
-            $(".ex-container").mouseover(function(){
+              })
+              $(".ex-container").mouseenter(function(){
                 $(this).find(".img-name").animate({opacity: 1},'fast');
-            }).mouseleave(function(){
+              }).mouseleave(function(){
                 $(this).find(".img-name").animate({opacity: 0},'fast');
-            });
-        </script>
-       <!--javascript d3 graphics-->
-
-        <script>            
-          function drawChart(filename, height){
-            var barChart = d3.select("a[class$='"+filename+"']")
-                            .append("svg")
-                            .attr("class","ex-bar")
-                            .attr("width", 25)
-                            .attr("height", height);
-            
-            d3.json("data/exploratory.json", function(error,data){
-              if (error) throw error;
-              var listLength = data[filename].length;
-              barChart.selectAll("rect")
-                      .data(data[filename])
-                      .enter()
-                      .append("rect")
-                      .attr("height",function(d,i){return height/listLength})
-                      .attr("width","25")
-                      .attr("y",function(d,i){return i*height/listLength})
-                      .attr("fill", function(d,i){return d})
-                      .attr("x","25")
-                      .transition("1000")
-                      .attr("x","0")
-                });
-          }
-
-            $(".ex-container").mouseover(function(){
-              var filename = $(this).find("img").attr("src").slice(19);
-              drawChart(filename, this.clientHeight);
-            }).mouseout(function(){
-              $(this).find(".ex-bar")
-                    .css("z-index","-1")
-                    .animate({left:0},'fast', function(){
-                      $(this).remove()
-              }); 
-            });
+              });
             </script>
-      </div>
-    </section>
+           <!--javascript d3 graphics-->
 
-</div>
-<div class="mod-nav">
-    <ul class="mod-nav-list js-singular-nav">
-        <li class="mod-nav-item"><a href="#sec01">1</a></li>
-        <li class="mod-nav-item"><a href="#sec02">2</a></li>
-        <li class="mod-nav-item"><a href="#sec03">3</a></li>
-        <li class="mod-nav-item"><a href="#sec04">4</a></li>
-        <li class="mod-nav-item"><a href="#sec05">5</a></li>
-        <li class="mod-nav-item"><a href="#sec06">6</a></li>
-        <li class="mod-nav-item"><a href="#sec07">7</a></li>
-    </ul>
+            <script>            
+              function drawChart(filename, height){
+                var barChart = d3.select("a[class$='"+filename+"']")
+                  .append("svg")
+                  .attr("class","ex-bar")
+                  .attr("width", 25)
+                  .attr("height", height);
 
-</div>
+                d3.json("data/exploratory.json", function(error,data){
+                  if (error) throw error;
+                  var listLength = data[filename].length;
+                  barChart.selectAll("rect")
+                          .data(data[filename])
+                          .enter()
+                          .append("rect")
+                          .attr("height",function(d,i){return height/listLength})
+                          .attr("width","25")
+                          .attr("y",function(d,i){return i*height/listLength})
+                          .attr("fill", function(d,i){return d})
+                          .attr("x","25")
+                          .transition("1000")
+                          .attr("x","0")
+                    });
+              }
 
+                $(".ex-container").mouseenter(function(){
+                  var filename = $(this).find("img").attr("src").slice(19);
+                  drawChart(filename, this.clientHeight);
+                }).mouseleave(function(){
+                  $(this).find(".ex-bar")
+                        .css("z-index","-1")
+                        .animate({left:0},'fast', function(){
+                          $(this).remove()
+                  }); 
+                });
+                </script>
+          </div>
+        </section>
+
+
+    <div class="mod-nav">
+        <ul class="mod-nav-list js-singular-nav">
+            <li class="mod-nav-item"><a href="#sec01">1</a></li>
+            <li class="mod-nav-item"><a href="#sec02">2</a></li>
+            <li class="mod-nav-item"><a href="#sec03">3</a></li>
+            <li class="mod-nav-item"><a href="#sec04">4</a></li>
+            <li class="mod-nav-item"><a href="#sec05">5</a></li>
+            <li class="mod-nav-item"><a href="#sec06">6</a></li>
+            <li class="mod-nav-item"><a href="#sec07">7</a></li>
+        </ul>
+
+    </div>
+
+    </div>
 </div>
 </body>
 </html>
