@@ -355,18 +355,14 @@ a.ui-button:active,
 .ui-state-highlight-a,
 .ui-widget-content .ui-state-highlight-a,
 .ui-widget-header .ui   -state-highlight {
-    /*	border: 1px solid #dad55e;*/
     background: url('../images/mens_health_all.png');
     background-size: 100% 100%;
-    /*	color: #777620;*/
 }
 .ui-state-highlight-b,
 .ui-widget-content .ui-state-highlight-b,
 .ui-widget-header .ui   -state-highlight {
-    /*	border: 1px solid #dad55e;*/
     background: url('../images/womens_health_all.png');
     background-size: 100% 100%;
-    /*	color: #777620;*/
 }
 
 .ui-state-checked {
@@ -674,103 +670,3 @@ a.ui-button:active,
     box-shadow: 0px 0px 5px #666666;
 }
 
-/* Siena */
-.magazine-grid-container-a {
-    display: grid;
-    grid-template-columns:5% 5%;
-    padding: 0;
-    margin: 0;
-    justify-self: center;
-    text-align: center;
-    align-self: center;
-}
-.magazine-grid-container-b {
-    display: grid;
-    grid-template-columns: auto auto;
-    padding: 0;
-    margin: 0;
-    justify-self: center;
-    text-align: center;
-    align-self: center;
-}
-.magazine-grid-item {
-    border: 1px solid rgba(0, 0, 0, 0);
-    padding: 0;
-    margin: 0;
-    font-size: 30px;
-    text-align: center;
-    align-self: center;
-    justify-self: center;
-}
-.magazine-grid-container-5 {
-    display: grid;
-    grid-template-columns: auto auto auto auto;
-    padding: 0;
-    margin: 0;
-    justify-self: center;
-    width: 90%;
-    margin-left: 50px;
-}
-.magazine-grid-item-5 {
-    border: 1px solid rgba(0, 0, 0, 0);
-    padding: 0;
-    margin: 0;
-    font-size: 30px;
-    text-align: center;
-    align-self: center;
-    justify-self: center;
-}
-.menshealth {
-    background-image: url('../images/mens_health1.jpg'); 
-    background-size: 100% 100%; 
-    background-repeat: no-repeat; 
-    margin: 3;
-}
-.womenshealth {
-    background-image: url('../images/womens_health1.jpg'); 
-    background-size: 100% 100%; 
-    background-repeat: no-repeat; 
-    margin: 3;
-}
-.placeholder {
-    background-image: url('../images/placeholder.png'); 
-    background-size: 100% 100%; 
-    background-repeat: no-repeat; 
-    margin: 3;
-}
-.usa {
-    background-image: url('../images/usa.jpg'); 
-    background-size: 100% 100%; 
-    background-repeat: no-repeat; 
-    margin: 3;
-}
-.japan {
-    background-image: url('../images/japan.jpg'); 
-    background-size: 100% 100%; 
-    background-repeat: no-repeat; 
-    margin: 3;
-}
-.italia {
-    background-image: url('../images/italia.jpg'); 
-    background-size: 100% 100%; 
-    background-repeat: no-repeat; 
-    margin: 3;
-}
-#droppable-a, 
-#droppable-b { 
-    width: 347px; 
-    height: 450px; 
-    padding: 0.5em; 
-    float: left; 
-    margin: 10px; 
-}
-#draggable-a,
-#draggable-b, 
-#draggable-nonvalid-a, 
-#draggable-nonvalid-b { 
-    width: 77px; 
-    height: 100px; 
-    padding: 0.5em; 
-    float: left; 
-    margin: 10px 10px 10px 0; 
-}
