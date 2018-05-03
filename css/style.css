@@ -488,7 +488,6 @@ a, em{
   text-align: left;  
 }
 .feature-img{
-<<<<<<< HEAD
   display:inline-block;
   position:absolute;
   top:85%;
@@ -498,13 +497,11 @@ a, em{
   float:left;
   opacity: 1;
   height:150px;
-=======
   position: absolute;
   opacity: 0;
   left: 370px;
   width:60%;
-  top: 65%;
->>>>>>> 8281a6c24720f6451fb9fcae22789854748076ea
+  top: 80%;
 }
 
 
@@ -574,7 +571,8 @@ a, em{
 .speech-bubble {
   color:white;
   background: #f0454560;
-  padding: 5%;
+  top: 55%;
+  padding: 1%;
   border-radius: .4em;
   margin-left: 0;
 }
