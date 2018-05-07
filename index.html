@@ -350,14 +350,14 @@ $(function() {
                     $(".feature-img").empty();
                     $(".feature-txt").html("I spy a suit and tie in the bottom half of the image. This year featured a record-breaking lowest number of women on the cover: 3.")
                                       .addClass("speech-bubble");
-                    $(".feature-img").append('<img id="men" src="./images/men.png" />');
+                    $(".feature-img").append('<img src="images/men.png" />');
                     $(".features").animate({opacity: '1'},"fast");
                   }
                   else if(year==1993){
                     $(".feature-img").empty();
                     $(".feature-txt").html("1993 covers featured text-heavy covers with bold black, white, and yellow titles spread across the covers.")
                                       .addClass("speech-bubble");
-                    $(".feature-img").append('<img id="1993" src="./images/time_1993.png"/>')
+                    $(".feature-img").append('<img src="images/time_1993.png"/>')
                     $(".features").animate({opacity: '1'},"fast");
                   }
                   else if(year==1924) {  
@@ -379,14 +379,14 @@ $(function() {
                     $(".feature-img").empty();
                     $(".feature-txt").html("The year of...")
                                       .addClass("speech-bubble");
-                    $(".feature-img").append('<img id="trump17" src="./images/trmp_2017.png"" style="width:350px" />');
+                    $(".feature-img").append('<img src="images/trmp_2017.png"" style="width:350px" />');
                     $(".features").animate({opacity: '1'},"fast");
                   }
                   else if(year==2018){
                     $(".feature-img").empty();
                     $(".feature-txt").html("Welcome to today. Can you spot this cover? ;)")
                                       .addClass("speech-bubble");
-                    $(".feature-img").append('<img id="tr*mp" src="./images/trump.jpg"/>');
+                    $(".feature-img").append('<img src="images/trump.jpg"/>');
                     $(".features").animate({opacity: '1'},"fast");
                   }
                   else if(year >= 1928 && year <= 1952) {
@@ -407,72 +407,6 @@ $(function() {
                   }
                     changeTimeCover(year);
                     changeBar(year);
-                    if(year==1966){
-                        $(".feature-txt").animate({opacity: '1'},"fast")
-                            .html("I spy a suit and tie in the bottom half of the image. This year featured a record-breaking lowest number of women on the cover: 3.");
-//                                    $(".feature-img img").remove();
-                        $(".feature-img").animate({opacity: '1'},"fast")
-                        .prepend('<img id="men" src="./images/men.png" style="width:450px" />');
-                        $(".feature-img2 img").remove();
-
-                    }
-                    else if(year==1993){
-                        $(".feature-txt").animate({opacity: '1'},"fast")
-                            .html("1993 covers featured text-heavy covers with bold black, white, and yellow titles spread across the covers.");
-//                                    $(".feature-img img").remove();
-                        $(".feature-img").animate({opacity: '1'},"fast")
-                        .prepend('<img id="1993" src="./images/time_1993.png" style="width:350px" />');
-//                                    $(".feature-img img").remove();
-
-                    }
-                    else if(year==1924) {
-                        $(".feature-txt").animate({opacity: '1'},"fast")
-                            .html("At its inception, the magazine didn't have its now-famous signature red border.");
-                        $(".feature-img img").remove();
-                        $(".feature-img2 img").remove();
-                    }
-                    else if(year==1927) {
-                        $(".feature-txt").animate({opacity: '1'},"fast")
-                            .html("Four years after the first magazine, the red border is added.");
-                        $(".feature-img img").remove();
-                        $(".feature-img2 img").remove();
-
-                    }
-                    else if(year==2017){
-                        $(".feature-txt").animate({opacity: '1'},"fast")
-                            .html("The year of...");
-                                    $(".feature-img img").remove();
-                        $(".feature-img").animate({opacity: '1'},"fast")
-                        .prepend('<img id="trump17" src="./images/trmp_2017.png" style="height:200px" style="width:350px" />');
-//                                    $(".feature-img img").remove();
-
-                    }
-                    else if(year==2018){
-                        $(".feature-txt").animate({opacity: '1'},"fast")
-                            .html("Welcome to today. Can you spot this cover? ;)");
-                                    $(".feature-img img").remove();
-                        $(".feature-img").animate({opacity: '1'},"fast")
-                        .prepend('<img id="tr*mp" src="./images/trump.jpg" style="width:200px" style="width:250px" />');
-//                                    $(".feature-img img").remove();
-
-                    }
-                    else if(year >= 1928 && year <= 1952) {
-                        $(".feature-txt").animate({opacity: '1'},"fast")
-                            .html("During these years (1928 – 1952), a consistent theme appears: red border and a lot of white space around a headshot (usually of a man).");
-                        $(".feature-img img").remove();
-                        $(".feature-img2 img").remove();
-                    }
-                    else if(year >= 1974 && year <= 1976) {
-                        $(".feature-txt").animate({opacity: '1'},"fast")
-                            .html("Watch closely what happens between 1974 and 1976. There appears to be a shift in the prominence of a recognizable face in the data. In the modern history of Time magazine, fewer faces are featured and covers become less about individual people.");
-                        $(".feature-img img").remove();
-                        $(".feature-img2 img").remove();
-                    }
-                    else {
-                        $(".feature-txt").animate({opacity: '0'},"fast");
-                        $(".feature-img img").remove();
-                        $(".feature-img2 img").remove();
-                    }
                 }
               </script>
 
