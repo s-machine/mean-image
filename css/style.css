@@ -478,6 +478,10 @@ a, em{
   opacity: 0;
   text-align: left;
 }
+
+.features{
+  height: 100%;
+}
 .feature-txt{
   display:inline-block;
   position: absolute;
@@ -491,12 +495,14 @@ a, em{
   display:inline-block;
   position:absolute;
   top:85%;
+  height: 35%;
   left:370px;
 }
 .feature-img img{
   float:left;
+  height: 100%;
   opacity: 1;
-  height: 150px;
+
 }
 
 
