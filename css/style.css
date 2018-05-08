@@ -572,8 +572,7 @@ a, em{
 .speech-bubble {
   color:white;
   background: #f0454560;
-  top: 55%;
-  padding: 1%;
+  padding: 15px;
   border-radius: .4em;
   margin-left: 0;
 }
