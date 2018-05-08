@@ -2,10 +2,13 @@
   font-family: "hn_thin";
   src: url("hn_thin.otf");
 }
-
 @font-face {
   font-family: "hn_thin_italic";
   src: url("hn_thin_italic.otf");
+}
+@font-face {
+  font-family: "hn_roman";
+  src: url("hn_roman.otf");
 }
 /* http://meyerweb.com/eric/tools/css/reset/ 
 v2.0 | 20110126
@@ -104,7 +107,9 @@ a, em{
   font-weight: bold;
   color:#f04545;
 }
-
+b{
+  font-family: "hn_roman";
+}
 #sec01 a {
   color: white;
 }
@@ -492,14 +497,14 @@ a, em{
   position: absolute;
   left: 370px;
   width:60%;
-  margin-top: 5%;
+  margin-top: 2%;
   top: 50%;
   text-align: left;  
 }
 .feature-img{
   display:inline-block;
   position:absolute;
-  top:95%;
+  top:90%;
   height: 35%;
   left:370px;
 }

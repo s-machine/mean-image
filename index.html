@@ -62,9 +62,9 @@ $(function() {
                     Images like the ones below are the result of mathematically <em>averaging</em> several photographs. Digital averaging of pixels is a simple process where each pixel is treated as a numeric point with an RGB value. 
                 </p>
                 <p class="mod-singular-txt-2">
-                  This project is inspired by the artwork of contemporary artist <a href="http://www.salavon.com" target="_blank">Jason Salavon</a> whose series <a href="http://salavon.com/work/SpecialMoments/" target ="_blank">"100 Special Moments”</a> is shown below. Salavon is known for using computer software to reconfigure existing media into fine art. His series on averaged images straddles the boundary between art and data visualization, often revealing <em>intuitive, and never-before-seen patterns</em> in the pixels captured in photographs.
+                  This project is inspired by the artwork of contemporary artist <a href="http://www.salavon.com" target="_blank">Jason Salavon</a> whose series <a href="http://salavon.com/work/SpecialMoments/" target ="_blank">"100 Special Moments”</a> is shown below. Salavon is known for using computer software to reconfigure existing media into fine art. His series on averaged images straddles the boundary between art and data visualization, often revealing <em>intuitive and never-before-seen patterns</em> in the pixels captured in photographs.
                 </p>
-              <p><em>Hover over the images to see more</em></p>
+              <p>Hover over the images to see more</p>
                 <div class="salavon-grid">
                     <a href="http://salavon.com/work/SpecialMoments/" target="_blank">
                         <img src="images/salavon/100moments-1.jpg" height="200" class="salavon-photo" id="S-1"></a>
@@ -172,8 +172,8 @@ $(function() {
                     </div>
 
                     <div class="gird-item">
-                        <p class="grid-item converge-txt speech-bubble">The mean face composed of 100 images already begins to look similar to the average of all 2,414 faces. This means that if we took the "average" of every human's face on Earth, we wouldn't expect the face to look much different from the image on the right. </p>
-                        <p class="grid-item converge-txt-2 speech-bubble">This is very inspiring as, by a small sample of an image dataset, we can achieve an overall understanding of the whole.</p>
+                      <p class="grid-item converge-txt speech-bubble">The mean face composed of 100 images already begins to look similar to the average of all 2,414 faces. This means that if we took the "average" of every human's face on Earth, we <b>wouldn't expect the face to look much different</b> from the image on the right. </p>
+                      <p class="grid-item converge-txt-2 speech-bubble">This is very inspiring. It means that by a <b>small</b> sample of an image dataset, we can achieve an overall understanding of <b>the whole</b>.</p>
                     </div>
                   
                     <!--slider+caption-->
@@ -313,7 +313,7 @@ $(function() {
                     .attr("fill", function(d,i){return d});
                 });
                 
-                $(".feature-txt").html("Time magazine released its first issue in March, 1923. From the start, its cover features faces of important people. In its first year, it featured: Winston Churchill, President Rooservelt, Andrew Mellon, Mussolini, as well as G B Shaw").addClass("speech-bubble");
+                $(".feature-txt").html("Time magazine released its first issue in March, 1923. From the start, its cover features faces of important people. <br>In its first year, it featured: Winston Churchill, President Rooservelt, Andrew Mellon, Mussolini, as well as G B Shaw.").addClass("speech-bubble");
                 $(".feature-img").append('<img src="images/time_explanation/1923.jpg"/>')
 
                 function changeTimeCover(year){
@@ -368,7 +368,7 @@ $(function() {
                   }
                   else if(year==1923){
                     $(".feature-img").empty();
-                    $(".feature-txt").html("Time magazine released its first issue in March, 1923. From the start, its cover features faces of important people. In its first year, it featured: Winston Churchill, President Rooservelt, Andrew Mellon, Mussolini, as well as G B Shaw")
+                    $(".feature-txt").html("Time magazine released its first issue in March, 1923. From the start, its cover features faces of important people. <br>In its first year, it featured: Winston Churchill, President Rooservelt, Andrew Mellon, Mussolini, as well as G B Shaw.")
                                       .addClass("speech-bubble");
                     $(".feature-img").append('<img src="images/time_explanation/1923.jpg"/>')
                   }
