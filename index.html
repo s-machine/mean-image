@@ -127,7 +127,8 @@ $(function() {
                             .attr("x",function(d,i){return startX+i*(img_width/listLength)})
                             .attr("y","0")
                             .attr("fill", function(d,i){return d})
-                            .transition("1000")
+                            .transition()
+                            .duration(function(d, i) { return hexToValue(d)*500; })
                             .attr("height",function(d,i){return hexToValue(d)*75});
                         $("svg").translate
                     })
@@ -206,7 +207,6 @@ $(function() {
                         $("#realval").html(numImagesArr[newVal]+" faces");
                         $("#faces").attr("src", "images/mean_faces/mean_faces_" + numImages + ".png");
                     }
-
                 </script>
                 <!--next_page_button-->
                 <p class="mod-singular-pager"><a href="" class="mod-singular-next js-singular-next"></a></p>
@@ -230,7 +230,7 @@ $(function() {
                     <input step="1" class="slider-width time-slider" id="year" type="range" min="1923" max="2018" value="0" oninput="changeAll(this.value)" onchange="changeAll(this.value)" />
                     <span id="slider-thumb" class="thumb-tag">1923</span>
                   </div>
-                  <p class="time-intro">Time magazine has been famous for featuring faces on its covers. <br>The mean image on the right is generated from the all the <a href="http://time.com/" target ="_blank"><i>Time</i></a> Magazines in a year, since its inception until 2018. See if you can identify any historical events/figures from the mean images. Can you tell the gender of the prominent figures featured on covers throughout the years? Why might some years be darker/lighter than other years?</p>
+                  <p class="time-intro">Time magazine has been famous for featuring <b>faces</b> on its covers. <br>The mean image on the right is generated from the all the <a href="http://time.com/" target ="_blank"><i>Time</i></a> Magazines in a year, since its inception until 2018. See if you can identify any historical events/figures from the mean images. </p>
                   <br>
                   <div class="features">
                     <p class="feature-txt"></p>
@@ -339,7 +339,8 @@ $(function() {
                             .attr("fill", function(d,i){return d})
                             .attr("x","100")
                             .attr("width","0")
-                            .transition("1000")
+                            .transition()
+                            .duration(function(d, i) { return hexToValue(d)*600; })
                             .attr("x","45")
                             .attr("width", function(d,i){return hexToValue(d)*100})
                             .attr("x",function(d,i){return 100 - hexToValue(d)*100});
@@ -704,6 +705,7 @@ $(function() {
                           .attr("x","25")
                           .transition("1000")
                           .attr("x","0")
+                          .attr("opacity","1");
                     });
               }
 
