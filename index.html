@@ -172,8 +172,10 @@ $(function() {
                     </div>
 
                     <div class="gird-item">
-                        <p class="grid-item converge-txt speech-bubble">The mean face composed of 100 images already begins to look similar to the average of all 2,414 faces. This means that if we took the "average" of every human's face on Earth, we wouldn't expect the face to look much different from the image right. </p>
+                        <p class="grid-item converge-txt speech-bubble">The mean face composed of 100 images already begins to look similar to the average of all 2,414 faces. This means that if we took the "average" of every human's face on Earth, we wouldn't expect the face to look much different from the image on the right. </p>
+                        <p class="grid-item converge-txt-2 speech-bubble">This is very inspiring as, by a small sample of an image dataset, we can achieve an overall understanding of the whole.</p>
                     </div>
+                  
                     <!--slider+caption-->
                     <span class="grid-item face-number" id ="fn2">
                         2414 faces
@@ -195,6 +197,9 @@ $(function() {
                         if (newVal >= 2){ 
                             $(".converge-txt").animate({opacity: '1'},"slow");
                         }
+                        if (newVal >= 3){ 
+                            $(".converge-txt-2").animate({opacity: '1'},"slow");
+                        }
                         numImagesArr=["10", "50", "100", "500", "1000", "2414"]
                         numImages=numImagesArr[newVal];
                         $("#range").html(newVal);
@@ -212,7 +217,7 @@ $(function() {
         <!--page_5 History-->
         <section id="sec05" class="mod-singular-section">
           <div class="mod-singular-section-in">
-            <h2 class="mod-singular-hdng">Going back in <i>Time</i> with mean images</h2>
+            <h2 class="mod-singular-hdng">Faces throughout <i>Time</i> </h2>
               <div class="time-container">
               <!--slider image-->
                 <div class="time-div">
@@ -225,7 +230,7 @@ $(function() {
                     <input step="1" class="slider-width time-slider" id="year" type="range" min="1923" max="2018" value="0" oninput="changeAll(this.value)" onchange="changeAll(this.value)" />
                     <span id="slider-thumb" class="thumb-tag">1923</span>
                   </div>
-                  <p class="time-intro">The mean image on the right is generated from the all the <a href="http://time.com/" target ="_blank"><i>Time</i></a> Magazines in a year, since its inception until 2018. See if you can identify any historical events/figures from the mean images. Can you tell the gender of the prominent figures featured on covers throughout the years? Why might some years be darker/lighter than other years?</p>
+                  <p class="time-intro">Time magazine has been famous for featuring faces on its covers. <br>The mean image on the right is generated from the all the <a href="http://time.com/" target ="_blank"><i>Time</i></a> Magazines in a year, since its inception until 2018. See if you can identify any historical events/figures from the mean images. Can you tell the gender of the prominent figures featured on covers throughout the years? Why might some years be darker/lighter than other years?</p>
                   <br>
                   <div class="features">
                     <p class="feature-txt"></p>
@@ -237,11 +242,11 @@ $(function() {
               <script>
                 var width = $("#year")[0].clientWidth;
                 var years = 95;
-                var ticksValAl   = [1924,1927,1928,1952,1966,1974,1976,1993,2017,2018];
-                var ticksVal     = [1924,1927,1966,1993,2017,2018];
-                var ticksPosAll  = [2,   5,   6,   29,  44,  52,  54,  71,  95,  96];
-                var ticksPos  = [2,   5,   44,  71,  95,  96];
-                var rectEntry    = [2, 5];
+                var ticksValAl   = [1923,1925,1927,1928,1952,1966,1974,1976,1993,2017,2018];
+                var ticksVal     = [1923,1925,1927,1966,1993,2017,2018];
+                var ticksPosAll  = [1,   3,   5,   6,   29,  44,  52,  54,  71,  95,  96];
+                var ticksPos     = [1,   3,   5,   44,  71,  95,  96];
+                var rectEntry    = [3, 6];
                 var ticks = d3.select("#slider-range-max")
                               .append("svg")
                               .attr("class","stacked-bar")
@@ -307,6 +312,9 @@ $(function() {
                     .attr("y",function(d,i){ return i*(timeHeight/colorLength)})
                     .attr("fill", function(d,i){return d});
                 });
+                
+                $(".feature-txt").html("Time magazine released its first issue in March, 1923. From the start, its cover features faces of important people. In its first year, it featured: Winston Churchill, President Rooservelt, Andrew Mellon, Mussolini, as well as G B Shaw").addClass("speech-bubble");
+                $(".feature-img").append('<img src="images/time_explanation/1923.jpg"/>')
 
                 function changeTimeCover(year){
                   var timeCover = "images/time/Time-" + year + ".jpg" ;
@@ -350,56 +358,54 @@ $(function() {
                     $(".feature-img").empty();
                     $(".feature-txt").html("I spy a suit and tie in the bottom half of the image. This year featured a record-breaking lowest number of women on the cover: 3.")
                                       .addClass("speech-bubble");
-                    $(".feature-img").append('<img src="images/men.png" />');
-                    $(".features").animate({opacity: '1'},"fast");
+                    $(".feature-img").append('<img src="images/time_explanation/men.png" />');
                   }
                   else if(year==1993){
                     $(".feature-img").empty();
                     $(".feature-txt").html("1993 covers featured text-heavy covers with bold black, white, and yellow titles spread across the covers.")
                                       .addClass("speech-bubble");
-                    $(".feature-img").append('<img src="images/time_1993.png"/>')
-                    $(".features").animate({opacity: '1'},"fast");
+                    $(".feature-img").append('<img src="images/time_explanation/time_1993.png"/>')
                   }
-                  else if(year==1924) {  
+                  else if(year==1923){
+                    $(".feature-img").empty();
+                    $(".feature-txt").html("Time magazine released its first issue in March, 1923. From the start, its cover features faces of important people. In its first year, it featured: Winston Churchill, President Rooservelt, Andrew Mellon, Mussolini, as well as G B Shaw")
+                                      .addClass("speech-bubble");
+                    $(".feature-img").append('<img src="images/time_explanation/1923.jpg"/>')
+                  }
+                  else if(year==1925) {  
                     $(".feature-img").empty();
                     $(".feature-txt").animate({opacity: '1'},"fast")
-                                        .html("At its inception, the magazine didn't have its now-famous signature red border.")
+                                        .html("At its inception, the magazine didn't have its now-famous signature red border. <br>Funny thing: most covers feature bold men.")
                                         .addClass("speech-bubble");
-                    $(".features").animate({opacity: '1'},"fast");
-
+                    $(".feature-img").append('<img src="images/time_explanation/1925.jpg"/>')
                   }
                   else if(year==1927) {
                     $(".feature-img").empty();
                     $(".feature-txt").html("Four years after the first magazine, the red border is added.")
                                         .addClass("speech-bubble");
-                    $(".features").animate({opacity: '1'},"fast");
 
                   }
                   else if(year==2017){
                     $(".feature-img").empty();
                     $(".feature-txt").html("The year of...")
                                       .addClass("speech-bubble");
-                    $(".feature-img").append('<img src="images/trmp_2017.png"" style="width:350px" />');
-                    $(".features").animate({opacity: '1'},"fast");
+                    $(".feature-img").append('<img src="images/time_explanation/trmp_2017.png"" style="width:350px" />');
                   }
                   else if(year==2018){
                     $(".feature-img").empty();
                     $(".feature-txt").html("Welcome to today. Can you spot this cover? ;)")
                                       .addClass("speech-bubble");
-                    $(".feature-img").append('<img src="images/trump.jpg"/>');
-                    $(".features").animate({opacity: '1'},"fast");
+                    $(".feature-img").append('<img src="images/time_explanation/trump.jpg"/>');
                   }
                   else if(year >= 1928 && year <= 1952) {
                     $(".feature-img").empty();
                     $(".feature-txt").html("During these years (1928 – 1952), a consistent theme appears: red border and a lot of white space around a headshot (usually of a man).")
                                       .addClass("speech-bubble");
-                    $(".features").animate({opacity: '1'},"fast");
                   }
                   else if(year >= 1974 && year <= 1976) {
                     $(".feature-img").empty();
                     $(".feature-txt").html("Watch closely what happens between 1974 and 1976. There appears to be a shift in the prominence of a recognizable face in the data. In the modern history of Time magazine, fewer faces are featured and covers become less about individual people.")
                                       .addClass("speech-bubble");
-                    $(".features").animate({opacity: '1'},"fast");
                   }
                   else{ 
                     $(".feature-txt").removeClass("speech-bubble").empty();
@@ -419,7 +425,7 @@ $(function() {
         <!--page_6 Comparison-->
         <section id="sec06" class="mod-singular-section">
           <div class="mod-singular-section-in">
-            <h2 class="mod-singular-hdng">Comparison and revelation, through mean images </h2>
+            <h2 class="mod-singular-hdng">Comparison -> Revelation</h2>
             <span id="filters" class="button-group">
               <button class="button is-checked" data-filter="*">Explore All</button>
               <button class="button" data-filter=".mvw">Men vs Women</button>
@@ -429,22 +435,22 @@ $(function() {
             <span class="magazine-grid-a magazines">
               <span class="magazine  mvw">
                 <span id="draggable-a" class="ui-widget-content menshealth">
-                  <img src="images/mens_health1.jpg" width = "100">
+                  <img src="images/comparison/mens_health1.jpg" width = "100">
                 </span>
               </span>
               <span class="magazine countries">
                 <span id="draggable-a" class="ui-widget-content usa">
-                  <img src="images/usa.jpg" width = "100">
+                  <img src="images/comparison/usa.jpg" width = "100">
                 </span>
               </span>
               <span class="magazine mvw">
                 <span id="draggable-a" class="ui-widget-content gq">
-                  <img src="images/gq.jpg" width = "100">
+                  <img src="images/comparison/gq.jpg" width = "100">
                 </span>
               </span>
               <span class="magazine countries">
                 <span id="draggable-a" class="ui-widget-content italia">
-                  <img src="images/italia.jpg" width = "100">
+                  <img src="images/comparison/italia.jpg" width = "100">
                 </span>
               </span>
             </span>
@@ -467,22 +473,22 @@ $(function() {
             <span class="magazine-grid-b magazines">
               <span class="magazine mvw">
                 <span id="draggable-b" class="ui-widget-content womenshealth">
-                  <img src="images/womens_health1.jpg" width = "100">
+                  <img src="images/comparison/womens_health1.jpg" width = "100">
                 </span>
               </span>
               <span class="magazine countries">
                 <span id="draggable-b" class="ui-widget-content japan">
-                  <img src="images/japan.jpg" width = "100">
+                  <img src="images/comparison/japan.jpg" width = "100">
                 </span>
               </span>
               <span class="magazine countries">
-                <span id="draggable-b" class="ui-widget-content placeholder">
-                  <img src="images/usa.jpg" width = "100">
+                <span id="draggable-b" class="ui-widget-content esquire">
+                  <img src="images/comparison/esquire.jpg" width = "100">
                 </span>
               </span>  
               <span class="magazine mvw">
                 <span id="draggable-b" class="ui-widget-content glamour">
-                  <img src="images/glamour.jpg" width = "100">
+                  <img src="images/comparison/glamour.jpg" width = "100">
                 </span>
               </span>  
             </span>
@@ -516,7 +522,6 @@ $(function() {
             <script>
               $( function() {
                 $("#draggable-a, #draggable-b").draggable({ revert: "valid" });
-
                 $("#droppable-a").droppable({
                   accept: "#draggable-a",
                   classes: {
@@ -524,39 +529,34 @@ $(function() {
                     "ui-droppable-hover": "ui-state-hover-a"
                   },
                   drop: function(event,ui) {
-                    $(this).empty().append('<img src="images/mens_health_all.png" width="347px", height="450px">');
-
+                    if ($(ui.draggable).hasClass("menshealth")){
+                      $(this).empty().append('<img src="images/comparison/Result/mens_health_all.png" width="347px", height="450px">');
+                    }
+                    else if ($(ui.draggable).hasClass("usa")){
+                      $(this).empty().append('<img src="images/comparison/Result/vogue_usa.jpg" width="347px", height="450px">');
+                    }
+                    else if ($(ui.draggable).hasClass("italia")){
+                      $(this).empty().append('<img src="images/comparison/Result/vogue_italia.png" width="347px", height="450px">');
+                    }
+                    else return;
                   }
                 });
-                $( function() {
-                    $("#draggable-a, #draggable-b, #draggable-nonvalid-a, #draggable-nonvalid-b").draggable({ revert: "valid" });
-
-                    $( "#droppable-a" ).droppable({
-                        accept: "#draggable-a",
-                        classes: {
-                            "ui-droppable-active": "ui-state-active-a",
-                            "ui-droppable-hover": "ui-state-hover-a"
-                        },
-                        drop: function(event,ui) {
-                            $(this).addClass("ui-state-highlight-a")
-                                .find("p")
-                                .html("");
-                        }
-                    });
-
-                    $( "#droppable-b" ).droppable({
-                        accept: "#draggable-b",
-                        classes: {
-                            "ui-droppable-active": "ui-state-active-b",
-                            "ui-droppable-hover": "ui-state-hover-b"
-                        },
-                        drop: function(event,ui){
-                            $(this).addClass("ui-state-highlight-b")
-                                .find("p")
-                                .html("")}
-                    });
+                $( "#droppable-b" ).droppable({
+                  accept: "#draggable-b",
+                  classes: {
+                    "ui-droppable-active": "ui-state-active-b",
+                    "ui-droppable-hover": "ui-state-hover-b"
+                  },
+                  drop: function(event,ui){
+                    if ($(ui.draggable).hasClass("womenshealth")){
+                      $(this).empty().append('<img src="images/comparison/Result/womens_health_all.png" width="347px", height="450px">');
+                    }
+                    else if ($(ui.draggable).hasClass("japan")){
+                      $(this).empty().append('<img src="images/comparison/Result/vogue_japan.jpg" width="347px", height="450px">');
+                    }
+                  }
                 });
-            })
+              });
             </script>
             <!--next_page_button-->
             <p class="mod-singular-pager"><a href="" class="mod-singular-next js-singular-next"></a></p>

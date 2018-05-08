@@ -478,6 +478,11 @@ a, em{
   opacity: 0;
   text-align: left;
 }
+.converge-txt-2{
+  opacity: 0;
+  text-align: left;
+  margin-top: 25px;
+}
 
 .features{
   height: 100%;
@@ -485,16 +490,16 @@ a, em{
 .feature-txt{
   display:inline-block;
   position: absolute;
-  opacity: 0;
   left: 370px;
   width:60%;
+  margin-top: 5%;
   top: 50%;
   text-align: left;  
 }
 .feature-img{
   display:inline-block;
   position:absolute;
-  top:85%;
+  top:95%;
   height: 35%;
   left:370px;
 }
