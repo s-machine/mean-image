@@ -59,12 +59,11 @@ $(function() {
             <div class="mod-singular-section-in">
                 <h2 class="mod-singular-hdng">What is a "mean" image?</h2>
                 <p class="mod-singular-txt-2">
-                    Images like the ones below are the result of mathematically <em>averaging</em> several photographs. Digital averaging of pixels is a simple process where each pixel is treated as a numeric point with an RGB value. 
+                  Images like the ones below are the result of mathematically <em>averaging</em> several photographs. Averaging pixels is a simple process where each pixel is treated as a numeric point with an RGB value. 
                 </p>
                 <p class="mod-singular-txt-2">
-                  This project is inspired by the artwork of contemporary artist <a href="http://www.salavon.com" target="_blank">Jason Salavon</a> whose series <a href="http://salavon.com/work/SpecialMoments/" target ="_blank">"100 Special Moments”</a> is shown below. Salavon is known for using computer software to reconfigure existing media into fine art. His series on averaged images straddles the boundary between art and data visualization, often revealing <em>intuitive and never-before-seen patterns</em> in the pixels captured in photographs.
-                </p>
-              <p>Hover over the images to see more</p>
+                  This project wishes to use mean image as a tool, to explore ways to visualize and interact with image as <em>unstructured data</em>. This is inspired by the artwork of contemporary artist <a href="http://www.salavon.com" target="_blank">Jason Salavon</a> whose series <a href="http://salavon.com/work/SpecialMoments/" target ="_blank">"100 Special Moments”</a> is shown below. Salavon is known for using computer software to reconfigure existing media into fine art. His series on averaged images straddles the boundary between art and data visualization, often revealing <em>intuitive and never-before-seen patterns</em> in the pixels captured in photographs.
+                <p>Hover over the images to see more!</p>
                 <div class="salavon-grid">
                     <a href="http://salavon.com/work/SpecialMoments/" target="_blank">
                         <img src="images/salavon/100moments-1.jpg" height="200" class="salavon-photo" id="S-1"></a>
@@ -99,22 +98,22 @@ $(function() {
                 function getSum(total, num){
                     return total + num;
                 }
-                $('.salavon-photo').mouseover(function(){
+              
+                $('.salavon-photo').mouseenter(function(){
                     var id = Number($(this).attr("id")[2]); 
                     //not making it responsive... magic numbers
                     widthArray = [151,159,131,250]
                     var img_width = widthArray[id-1];
                     if (id == 1) startX = 0;
                     else{
-                        var startX = widthArray.slice(0,id-1).reduce(getSum) + 5*(id-1);
+                      var startX = widthArray.slice(0,id-1).reduce(getSum) + 5*(id-1);
                     }
-
                     var barChart = d3.select(".salavon-grid")
-                    .append("svg")
-                    .attr("class","salavon-bar")
-                    .attr("width", 1000)
-                    .attr("height", 75);
-
+                                      .append("svg")
+                                      .attr("class","salavon-bar bar-"+$(this).attr("id"))
+                                      .attr("width", 1000)
+                                      .attr("height", 75);
+                  
                     d3.json("data/salavon.json", function(error,data){
                         if (error) throw error;
                         let listLength = data[id-1].colorList.length;
@@ -128,15 +127,18 @@ $(function() {
                             .attr("y","0")
                             .attr("fill", function(d,i){return d})
                             .transition()
-                            .duration(function(d, i) { return hexToValue(d)*500; })
+                            .duration(function(d,i) { return hexToValue(d)*500; })
                             .attr("height",function(d,i){return hexToValue(d)*75});
-                        $("svg").translate
                     })
-                }).mouseout(function(){
+
+                }).mouseleave(function(){
+                      var currID = $(this).attr("id");
                     d3.select("#sec02").selectAll("rect")
                         .transition("1000")
                         .attr("height","0")
-                        .remove();
+                        .on("end", function(){
+                          d3.select("#sec02").selectAll(".bar-"+currID).remove();
+                        });
                 });
 
             </script>
@@ -242,26 +244,17 @@ $(function() {
               <script>
                 var width = $("#year")[0].clientWidth;
                 var years = 95;
-                var ticksValAl   = [1923,1925,1927,1928,1952,1966,1974,1976,1993,2017,2018];
-                var ticksVal     = [1923,1925,1927,1966,1993,2017,2018];
-                var ticksPosAll  = [1,   3,   5,   6,   29,  44,  52,  54,  71,  95,  96];
-                var ticksPos     = [1,   3,   5,   44,  71,  95,  96];
-                var rectEntry    = [3, 6];
+                var ticksValAl   = [1923,1925,1927,1928,1952,1939,1945,1954,1966,1974,1976,1993,2017,2018];
+                var ticksPosAll  = [1,   3,   5,   6,   30,  17,  23,  32,  44,  52,  54,  71,  95,  96];
+                var ticksVal     = [1923,1925,1927,1939,1945,1954,1966,1993,2017,2018];
+                var ticksPos     = [1,   3,   5,   17,  23,  32,  44,  71,  95,  96];
+                var rectEntry    = [3, 9];
                 var ticks = d3.select("#slider-range-max")
                               .append("svg")
                               .attr("class","stacked-bar")
                               .attr("width", width+15)
                               .attr("height", 40);
                 function draw(){
-                  ticks.selectAll("circle")
-                        .data(ticksVal)
-                        .enter()
-                        .append("circle")
-                        .attr("cx", function(d,i){return 10+(ticksPos[i]*((width-20)/years));})
-                        .attr("cy", "18")
-                        .attr("r", "10")
-                        .attr("fill", "#f0454540")
-                        .attr("class", "ticks")
                   ticks.selectAll("rect")
                         .data(rectEntry)
                         .enter()
@@ -272,9 +265,18 @@ $(function() {
                         .attr("y", "8")
                         .attr("width", function(d,i){return ((ticksPosAll[d+1]-ticksPosAll[d])*((width-20)/years)+20);})
                         .attr("height", "20")
-                        .attr("fill", "#f0454540")
+                        .attr("fill", "#66666616")
                         .attr("class", "ticks")
                         .append();
+                  ticks.selectAll("circle")
+                        .data(ticksVal)
+                        .enter()
+                        .append("circle")
+                        .attr("cx", function(d,i){return 10+(ticksPos[i]*((width-20)/years));})
+                        .attr("cy", "18")
+                        .attr("r", "10")
+                        .attr("fill", "#f0454540")
+                        .attr("class", "ticks")        
                 }
                 draw();
 
@@ -357,7 +359,7 @@ $(function() {
                   changeBar(year);
                   if(year==1966){
                     $(".feature-img").empty();
-                    $(".feature-txt").html("I spy a suit and tie in the bottom half of the image. This year featured a record-breaking lowest number of women on the cover: 3.")
+                    $(".feature-txt").html("I spy a suit and tie in the bottom half of the image.")
                                       .addClass("speech-bubble");
                     $(".feature-img").append('<img src="images/time_explanation/men.png" />');
                   }
@@ -366,6 +368,12 @@ $(function() {
                     $(".feature-txt").html("1993 covers featured text-heavy covers with bold black, white, and yellow titles spread across the covers.")
                                       .addClass("speech-bubble");
                     $(".feature-img").append('<img src="images/time_explanation/time_1993.png"/>')
+                  }
+                  else if(year==1954){
+                    $(".feature-img").empty();
+                    $(".feature-txt").html("In 1954, the magazine started to remove the white padding on the covers, and started feature headshots in different places on the cover.")
+                                      .addClass("speech-bubble");
+                    $(".feature-img").append('<img src="images/time_explanation/1954.jpg"/>')
                   }
                   else if(year==1923){
                     $(".feature-img").empty();
@@ -402,6 +410,16 @@ $(function() {
                     $(".feature-img").empty();
                     $(".feature-txt").html("During these years (1928 – 1952), a consistent theme appears: red border and a lot of white space around a headshot (usually of a man).")
                                       .addClass("speech-bubble");
+                    if (year == 1939){
+                      $(".feature-txt").html("During these years (1928 – 1952), a consistent theme appears: red border and a lot of white space around a headshot (usually of a man).<br>1939 is the start of WWII. Relevant people are featured on the covers this year. e.g. Hitler, Churchill, and Simgly-Rydz")
+                                      .addClass("speech-bubble");
+                      $(".feature-img").empty().append('<img src="images/time_explanation/1939.jpg"/>');
+                    }
+                    if (year == 1945){
+                      $(".feature-txt").html("During these years (1928 – 1952), a consistent theme appears: red border and a lot of white space around a headshot (usually of a man).<br>During WWII, Time magazine often features military officers.")
+                                      .addClass("speech-bubble");
+                      $(".feature-img").empty().append('<img src="images/time_explanation/1945.jpg"/>');
+                    }
                   }
                   else if(year >= 1974 && year <= 1976) {
                     $(".feature-img").empty();
